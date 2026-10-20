@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-19T22:15:00-03:00",
+  "publisher": "Garibalde Amaral Advogados Associados",
+  "plugins": {
+    "consulta-processual-segura/consulta-processual-segura.php": {
+      "slug": "consulta-processual-segura",
+      "name": "Consulta Processual Segura - Garibalde Advogados",
+      "version": "1.6.0",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/consulta-processual-segura-1.6.0.zip",
+      "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
+      "requires": "6.2",
+      "requires_php": "7.4",
+      "tested": "7.1.3",
+      "sections": {
+        "description": "Consulta Processual Segura - Garibalde Advogados",
+        "changelog": "Aprimoramentos visuais e de segurança da página de consulta processual."
+      }
+    },
+    "garibalde-modo-manutencao/garibalde-modo-manutencao.php": {
+      "slug": "garibalde-modo-manutencao",
+      "name": "Garibalde Amaral — Modo Manutenção Institucional",
+      "version": "1.0.2",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/garibalde-modo-manutencao-1.0.2.zip",
+      "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
+      "requires": "6.0",
+      "requires_php": "7.4",
+      "tested": "7.1.3",
+      "sections": {
+        "description": "Garibalde Amaral — Modo Manutenção Institucional",
+        "changelog": "Correção de privacidade: remove e-mail pessoal embutido como padrão; o botão de e-mail só aparece quando o endereço é configurado."
+      }
+    },
+    "garibalde-rai-alertas/garibalde-rai-alertas.php": {
+      "slug": "garibalde-rai-alertas",
+      "name": "Garibalde Amaral — Alertas de Atendimento R.A.I.",
+      "version": "1.0.1",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/garibalde-rai-alertas-1.0.1.zip",
+      "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
+      "requires": "6.2",
+      "requires_php": "7.4",
+      "tested": "7.1.3",
+      "sections": {
+        "description": "Garibalde Amaral — Alertas de Atendimento R.A.I.",
+        "changelog": "Tratamento de falhas do motor de e-mail para evitar erro fatal no painel; requer SMTP configurado para entrega."
+      }
+    },
+    "garibalde-whatsapp-assistente/garibalde-whatsapp-assistente.php": {
+      "slug": "garibalde-whatsapp-assistente",
+      "name": "Garibalde Amaral — WhatsApp de Atendimento Inicial",
+      "version": "1.2.0",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/garibalde-whatsapp-assistente-1.2.0.zip",
+      "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
+      "requires": "6.2",
+      "requires_php": "7.4",
+      "tested": "7.1.3",
+      "sections": {
+        "description": "Garibalde Amaral — WhatsApp de Atendimento Inicial",
+        "changelog": "Mensagens revisadas e animação discreta do botão com respeito à preferência por movimento reduzido."
+      }
+    },
+    "garibalde-auto-updates/garibalde-auto-updates.php": {
+      "slug": "garibalde-auto-updates",
+      "name": "Garibalde Amaral — Atualizações Automáticas",
+      "version": "1.0.0",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/garibalde-auto-updates-1.0.0.zip",
+      "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
+      "requires": "6.2",
+      "requires_php": "7.4",
+      "tested": "7.1.3",
+      "sections": {
+        "description": "Garibalde Amaral — Atualizações Automáticas",
+        "changelog": "Primeira versão estável do gerenciador de atualizações por manifesto HTTPS."
+      }
+    }
+  }
+}
