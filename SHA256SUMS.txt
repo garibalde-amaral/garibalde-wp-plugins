@@ -1,0 +1,8 @@
+2fb551beef0d3b2e12e4930b139fc608c1d528813bca4ae9ad6a3643998b97ad  CHANGELOG.md
+93c1c68dc5248507c815d254baf8b74786793bb4bcf607431161ce52adc4f9ca  README.md
+fcac1ebb3c035552e01480ab3248977e29661c92b32427010e9e831e057b1916  manifest.json
+7d1bc3369d6233c85dd58b408d68690e24436b0a88a77c068529742d503cd3f9  packages/consulta-processual-segura-1.6.0.zip
+4cac865e35a34eda05cd0f42829a4100d46af10a8593ec136e6a4bf88d5f485e  packages/garibalde-auto-updates-1.0.0.zip
+5838d995ab987d05324fb91c24f775851438efc990da6d9c263e3ff1cbc883c3  packages/garibalde-modo-manutencao-1.0.2.zip
+e1680a694f717611ee638b10b192a61d49c9943ade96d958adbf81294bc2544b  packages/garibalde-rai-alertas-1.0.1.zip
+5d1f4b4109b23811c675fa1764d3ac2db30d8fd106ad5585009a5db4780a4cc2  packages/garibalde-whatsapp-assistente-1.2.0.zip
