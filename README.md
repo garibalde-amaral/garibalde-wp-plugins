@@ -15,7 +15,7 @@ Repositório público destinado exclusivamente à distribuição de código dos 
 
 ## Segurança e estado de implantação
 
-Não incluir senhas, tokens, credenciais, dados de clientes, bases de dados, backups, logs privados nem processos judiciais. Este repositório foi preparado para publicar código de plugins apenas. Os pacotes devem evitar endereços de e-mail pessoais embutidos como valores padrão; configure os contatos no painel WordPress. O pacote Modo Manutenção 1.0.2 remove esse valor padrão e só exibe o botão de e-mail quando endereço válido estiver configurado.
+Não incluir senhas, tokens, credenciais, dados de clientes, bases de dados, backups, logs privados nem processos judiciais. Este repositório foi preparado para publicar código de plugins apenas. Os pacotes devem evitar endereços de e-mail pessoais embutidos como valores padrão; configure os contatos no painel WordPress. O pacote Modo Manutenção 1.0.2 remove esse valor padrão e só exibe o botão de e-mail quando há endereço válido configurado.
 
 **Antes de habilitar atualizações automáticas na produção:** validar o manifesto no WordPress, conferir o mapeamento do plugin “Consulta Processual Segura” (o gerenciador instalado atualmente o identifica como não instalado apesar de aparecer ativo na lista de plugins), fazer backup restaurável, testar uma atualização manual e testar as funcionalidades afetadas. Manter a opção de instalação automática desativada até a validação.
 
