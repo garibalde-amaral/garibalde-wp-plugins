@@ -5,3 +5,4 @@ d3889ac004e28cc2a926ec3161d41b06e6e455612ad8af5df4e5a35720f13741  packages/consu
 5838d995ab987d05324fb91c24f775851438efc990da6d9c263e3ff1cbc883c3  packages/garibalde-modo-manutencao-1.0.2.zip
 e1680a694f717611ee638b10b192a61d49c9943ade96d958adbf81294bc2544b  packages/garibalde-rai-alertas-1.0.1.zip
 5d1f4b4109b23811c675fa1764d3ac2db30d8fd106ad5585009a5db4780a4cc2  packages/garibalde-whatsapp-assistente-1.2.0.zip
+1565d9fc550a5e7386b15819553e86853dd69ca185cbfcdc83472aae3e41bf8b  packages/garibalde-auto-updates-1.0.1.zip

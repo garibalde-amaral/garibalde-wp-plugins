@@ -12,15 +12,15 @@ Repositório público destinado exclusivamente à distribuição de código dos 
 `https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/manifest.json`
 
 ## Estado de implantação e segurança
-O repositório é público. Não incluir senhas, tokens, credenciais, dados de clientes, bases de dados, backups, logs privados ou processos judiciais. Os pacotes devem conter apenas código e recursos necessários aos plugins.
+Não incluir senhas, tokens, credenciais, dados de clientes, bases de dados, backups, logs privados ou processos judiciais. Os pacotes devem conter somente código e recursos necessários aos plugins.
 
-Antes de habilitar atualizações automáticas na produção:
+Antes de habilitar atualizações automáticas em produção:
 1. Validar o manifesto no WordPress.
 2. Manter backup recente e restaurável.
-3. Testar manualmente cada atualização e conferir as funcionalidades afetadas.
-4. Confirmar links da Consulta Processual Segura e do bloco “Últimas Notícias” após a versão 1.6.1.
-5. Ativar a automação somente depois dos testes.
+3. Testar manualmente cada atualização e verificar as funcionalidades afetadas.
+4. Confirmar a Consulta Processual e os links da página inicial após a atualização.
+5. Ativar atualizações automáticas somente depois dos testes.
 
-A versão 1.6.1 da Consulta Processual Segura foi publicada para corrigir links e preservar o diretório do plugin já instalado. A validação funcional no site de produção permanece pendente até a conferência visual após a atualização.
+A versão 1.0.1 do gerenciador remove uma referência fixa obsoleta ao arquivo da Consulta Processual. A instalação e a conferência na tela de administração de produção ainda são necessárias.
 
-O repositório distribui versões previamente criadas e aprovadas. Ele não cria, revisa ou publica novas versões por conta própria.
+O repositório distribui versões previamente preparadas e aprovadas; não cria, revisa ou publica novas versões por conta própria.
