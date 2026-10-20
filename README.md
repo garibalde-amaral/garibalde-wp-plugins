@@ -21,6 +21,8 @@ Antes de habilitar atualizações automáticas em produção:
 4. Confirmar a Consulta Processual e os links da página inicial após a atualização.
 5. Ativar atualizações automáticas somente depois dos testes.
 
-A versão 1.0.1 do gerenciador remove uma referência fixa obsoleta ao arquivo da Consulta Processual. A instalação e a conferência na tela de administração de produção ainda são necessárias.
+A versão 1.0.1 do gerenciador remove uma referência fixa obsoleta ao arquivo da Consulta Processual. O manifesto agora anuncia a Consulta Processual Segura 1.6.2, preservando o caminho instalado, acrescentando o cartão TJDFT/PJe e disponibilizando a proteção por senha nativa do WordPress. O ZIP passou no teste de integridade e o PHP passou na verificação sintática.
+
+**Estado de implantação da 1.6.2:** publicada no repositório e anunciada no manifesto; ainda requer instalação em produção, configuração administrativa da senha e testes manuais. A senha não é fornecida por este repositório nem é configurada automaticamente.
 
 O repositório distribui versões previamente preparadas e aprovadas; não cria, revisa ou publica novas versões por conta própria.
