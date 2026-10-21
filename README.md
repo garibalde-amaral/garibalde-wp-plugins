@@ -36,3 +36,7 @@ O manifesto anuncia a versão 1.2.2 do WhatsApp de Atendimento: correção robus
 - Consulta Processual Segura 1.6.5: pacote em `packages/consulta-processual-segura-1.6.5-home-social-links.zip`.
 - WhatsApp de Atendimento 1.2.2: pacote em `packages/garibalde-whatsapp-assistente-1.2.2.zip`.
 - O manifesto passou a anunciar ambas as versões. A instalação no WordPress e o teste funcional em produção ainda precisam ser confirmados. Para buscar a atualização após publicar, usar Configurações > Garibalde Atualizações > Verificar manifesto e atualizações agora.
+
+
+## Fale Conosco 1.0.0
+Novo plugin preparado para preencher o bloco central vazio da página /fale-conosco/ sem editar o tema. Requer instalação e ativação manual; depois, testar envio e recebimento de e-mail. A nova entrada do manifesto não significa que esteja instalado ou ativo.

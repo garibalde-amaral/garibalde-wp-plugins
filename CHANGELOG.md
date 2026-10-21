@@ -1,3 +1,9 @@
+## Fale Conosco 1.0.0 — recuperação da página vazia
+- Pacote `packages/garibalde-fale-conosco-1.0.0.zip` acrescentado ao repositório.
+- Injeta formulário responsivo na página /fale-conosco/ apenas quando o conteúdo principal está vazio; não altera o tema nem a página de consulta processual.
+- Inclui nonce, validação no servidor, honeypot, limite de tentativas e consentimento. Envia por wp_mail, sem guardar a mensagem no banco e sem upload de anexos.
+- Testes locais: sintaxe PHP e integridade ZIP aprovadas. Ativação, layout e entrega de e-mail em produção ainda pendentes.
+
 ## Consulta Processual Segura 1.6.5 — pacote de navegação e redes sociais
 - Publicado `packages/consulta-processual-segura-1.6.5-home-social-links.zip`.
 - Corrige navegação/links sociais no cabeçalho preservando o caminho do plugin instalado.

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-20T21:40:00-03:00",
+  "generated_at": "2026-10-20T22:05:00-03:00",
   "publisher": "Garibalde Amaral Advogados Associados",
   "plugins": {
     "Garibalde_Consulta_Processual_Design_v1.5/consulta-processual-segura.php": {
@@ -71,6 +71,20 @@
       "sections": {
         "description": "Garibalde Amaral — Atualizações Automáticas",
         "changelog": "Correção da tabela de plugins gerenciados: remove caminho obsoleto fixo da Consulta Processual e mostra apenas os caminhos declarados no manifesto e os plugins personalizados conhecidos."
+      }
+    },
+    "garibalde-fale-conosco/garibalde-fale-conosco.php": {
+      "slug": "garibalde-fale-conosco",
+      "name": "Garibalde Amaral — Fale Conosco",
+      "version": "1.0.0",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/garibalde-fale-conosco-1.0.0.zip",
+      "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
+      "requires": "6.2",
+      "requires_php": "7.4",
+      "tested": "7.1.3",
+      "sections": {
+        "description": "Recupera a página Fale Conosco quando o conteúdo principal está vazio, com formulário responsivo e protegido contra spam.",
+        "changelog": "Pacote novo; envia as mensagens via wp_mail para contato@garibaldeadvogados.com.br. Não armazena mensagens no banco nem recebe anexos. Requer ativação e teste de recebimento em produção."
       }
     }
   }
