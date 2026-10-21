@@ -1,3 +1,8 @@
+## WhatsApp de Atendimento 1.2.3 — hotfix de conflito com redes sociais legadas
+- Pacote `packages/garibalde-whatsapp-assistente-1.2.3-social-hotfix.zip` publicado.
+- Mantém as correções de mensagens da 1.2.2 e desativa o sobrescritor legado da Consulta 1.6.5 que reatribuía o Instagram pessoal e poderia conflitar com o ocultamento do ícone.
+- Sintaxe PHP e ZIP íntegro validados localmente. Atualização e testes em produção continuam pendentes.
+
 ## Auditoria de segurança do cabeçalho — 1.6.5 não recomendado
 - O pacote 1.6.5 reatribuía o Instagram pessoal `@garibaldeamaral` no cabeçalho, contrariando a separação entre perfil pessoal e perfil institucional.
 - O manifesto mantém temporariamente a versão segura 1.6.2 como atualização da Consulta Processual. A 1.6.5 permanece no repositório para rastreabilidade, mas não é anunciada como versão estável.

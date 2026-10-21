@@ -11,3 +11,4 @@ a4e85a69cda017f77c01251c4b0e124df77f65953913a95fa0d4b517d97cf3ae  garibalde-what
 34848db3f45d32d46c7881488a7109d1ab1c088ebd5fb0ff1736f1c64bef3d47  packages/consulta-processual-segura-1.6.5-home-social-links.zip
 a4e85a69cda017f77c01251c4b0e124df77f65953913a95fa0d4b517d97cf3ae  packages/garibalde-whatsapp-assistente-1.2.2.zip
 ecd072d7606cb3635da0edd201fd4a6d20b1c524e1e5d9353e2bcbf600ce1ce8  packages/garibalde-fale-conosco-1.0.0.zip
+b4bfeab803e035d62e9df7a62acce98e3fe7e14b25eef667dca114f1d6e0561f  packages/garibalde-whatsapp-assistente-1.2.3-social-hotfix.zip

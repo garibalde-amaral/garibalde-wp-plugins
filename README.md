@@ -44,3 +44,7 @@ Novo plugin preparado para preencher o bloco central vazio da página /fale-cono
 
 ## Nota de segurança de 20/10/2026
 A versão 1.6.5 não é anunciada no manifesto porque reintroduzia um link de Instagram pessoal. A versão estável do manifesto permanece 1.6.2 até que o pacote corretivo 1.6.6 seja publicado e conferido em `packages/`. Não instalar 1.6.5 manualmente.
+
+
+## WhatsApp 1.2.3
+Atualização corretiva para evitar que a Consulta 1.6.5 reintroduza o Instagram pessoal no cabeçalho. O gerenciador anuncia 1.2.3; após verificar o manifesto, testar mensagem e redes antes de divulgar.
