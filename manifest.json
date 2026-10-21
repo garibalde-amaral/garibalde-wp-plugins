@@ -1,20 +1,20 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-20T22:05:00-03:00",
+  "generated_at": "2026-10-20T22:30:00-03:00",
   "publisher": "Garibalde Amaral Advogados Associados",
   "plugins": {
     "Garibalde_Consulta_Processual_Design_v1.5/consulta-processual-segura.php": {
       "slug": "consulta-processual-segura",
       "name": "Consulta Processual Segura - Garibalde Advogados",
-      "version": "1.6.5",
-      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/consulta-processual-segura-1.6.5-home-social-links.zip",
+      "version": "1.6.2",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/consulta-processual-segura-1.6.2-password-pje.zip",
       "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
       "requires": "6.2",
       "requires_php": "7.4",
       "tested": "7.1.3",
       "sections": {
         "description": "Consulta Processual Segura - Garibalde Advogados",
-        "changelog": "Corrige a navegação principal e links de redes sociais, mantendo a pasta do plugin e as funções de consulta. Após atualização, validar a página Fale Conosco, os links de redes sociais e a proteção da Consulta Processual."
+        "changelog": "Versão estável publicada com senha nativa da página e portal TJDFT/PJe. Atualize o plugin existente e configure a senha em Configurações > Proteção da Consulta Processual. O pacote 1.6.5 foi retirado do manifesto após auditoria identificar que reatribuía o Instagram pessoal; uma versão corrigida será anunciada após publicação e validação do pacote."
       }
     },
     "garibalde-modo-manutencao/garibalde-modo-manutencao.php": {

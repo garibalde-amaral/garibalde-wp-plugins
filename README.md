@@ -40,3 +40,7 @@ O manifesto anuncia a versão 1.2.2 do WhatsApp de Atendimento: correção robus
 
 ## Fale Conosco 1.0.0
 Novo plugin preparado para preencher o bloco central vazio da página /fale-conosco/ sem editar o tema. Requer instalação e ativação manual; depois, testar envio e recebimento de e-mail. A nova entrada do manifesto não significa que esteja instalado ou ativo.
+
+
+## Nota de segurança de 20/10/2026
+A versão 1.6.5 não é anunciada no manifesto porque reintroduzia um link de Instagram pessoal. A versão estável do manifesto permanece 1.6.2 até que o pacote corretivo 1.6.6 seja publicado e conferido em `packages/`. Não instalar 1.6.5 manualmente.

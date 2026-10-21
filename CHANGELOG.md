@@ -1,3 +1,8 @@
+## Auditoria de segurança do cabeçalho — 1.6.5 não recomendado
+- O pacote 1.6.5 reatribuía o Instagram pessoal `@garibaldeamaral` no cabeçalho, contrariando a separação entre perfil pessoal e perfil institucional.
+- O manifesto mantém temporariamente a versão segura 1.6.2 como atualização da Consulta Processual. A 1.6.5 permanece no repositório para rastreabilidade, mas não é anunciada como versão estável.
+- Pacote corrigido 1.6.6 preparado localmente; só será anunciado após publicação verificável do ZIP com o hash correspondente.
+
 ## Fale Conosco 1.0.0 — recuperação da página vazia
 - Pacote `packages/garibalde-fale-conosco-1.0.0.zip` acrescentado ao repositório.
 - Injeta formulário responsivo na página /fale-conosco/ apenas quando o conteúdo principal está vazio; não altera o tema nem a página de consulta processual.
