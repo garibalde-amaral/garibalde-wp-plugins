@@ -1,3 +1,10 @@
+## WhatsApp de Atendimento 1.2.2 — correções de mensagens e cabeçalho
+- Pacote: `garibalde-whatsapp-assistente-1.2.2.zip`.
+- Corrige mensagens antigas no momento do clique; evita saudações, assunto e origem repetidos mesmo com configurações antigas salvas.
+- Alinha os ícones sociais e oculta Instagram pessoal até perfil institucional confirmado.
+- Insere Central Digital somente quando a página estiver publicada.
+- Testes locais: sintaxe PHP, sintaxe JavaScript e integridade ZIP aprovadas; instalação/teste de produção ainda pendentes.
+
 # Changelog
 
 ## Consulta Processual Segura 1.6.2 — proteção por senha e portal TJDFT/PJe

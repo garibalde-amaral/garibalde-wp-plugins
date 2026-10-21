@@ -26,3 +26,7 @@ A versão 1.0.1 do gerenciador remove uma referência fixa obsoleta ao arquivo d
 **Estado de implantação da 1.6.2:** publicada no repositório e anunciada no manifesto; ainda requer instalação em produção, configuração administrativa da senha e testes manuais. A senha não é fornecida por este repositório nem é configurada automaticamente.
 
 O repositório distribui versões previamente preparadas e aprovadas; não cria, revisa ou publica novas versões por conta própria.
+
+
+## WhatsApp 1.2.2
+O manifesto anuncia a versão 1.2.2 do WhatsApp de Atendimento: correção robusta de mensagens duplicadas, alinhamento dos ícones sociais, ocultação do Instagram pessoal enquanto o perfil institucional não for confirmado e inclusão condicional do link Central Digital. Não equivale a bot que responda mensagens recebidas; a instalação/teste em produção ainda precisam ser confirmados.

@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-20T09:23:20-03:00",
+  "generated_at": "2026-10-20T21:25:00-03:00",
   "publisher": "Garibalde Amaral Advogados Associados",
   "plugins": {
     "Garibalde_Consulta_Processual_Design_v1.5/consulta-processual-segura.php": {
@@ -48,15 +48,15 @@
     "garibalde-whatsapp-assistente/garibalde-whatsapp-assistente.php": {
       "slug": "garibalde-whatsapp-assistente",
       "name": "Garibalde Amaral — WhatsApp de Atendimento Inicial",
-      "version": "1.2.0",
-      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/packages/garibalde-whatsapp-assistente-1.2.0.zip",
+      "version": "1.2.2",
+      "package_url": "https://raw.githubusercontent.com/garibalde-amaral/garibalde-wp-plugins/main/garibalde-whatsapp-assistente-1.2.2.zip",
       "details_url": "https://github.com/garibalde-amaral/garibalde-wp-plugins",
       "requires": "6.2",
       "requires_php": "7.4",
       "tested": "7.1.3",
       "sections": {
         "description": "Garibalde Amaral — WhatsApp de Atendimento Inicial",
-        "changelog": "Mensagens revisadas e animação discreta do botão com respeito à preferência por movimento reduzido."
+        "changelog": "Corrige mensagens antigas no momento do clique, remove saudações e blocos de origem duplicados, alinha ícones sociais do cabeçalho, oculta Instagram pessoal até haver conta institucional confirmada e inclui Central Digital no menu apenas quando a página estiver publicada. Não responde automaticamente a mensagens recebidas."
       }
     },
     "garibalde-auto-updates/garibalde-auto-updates.php": {
