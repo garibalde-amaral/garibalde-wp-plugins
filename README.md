@@ -30,3 +30,9 @@ O repositório distribui versões previamente preparadas e aprovadas; não cria,
 
 ## WhatsApp 1.2.2
 O manifesto anuncia a versão 1.2.2 do WhatsApp de Atendimento: correção robusta de mensagens duplicadas, alinhamento dos ícones sociais, ocultação do Instagram pessoal enquanto o perfil institucional não for confirmado e inclusão condicional do link Central Digital. Não equivale a bot que responda mensagens recebidas; a instalação/teste em produção ainda precisam ser confirmados.
+
+
+## Atualizações publicadas em 20/10/2026
+- Consulta Processual Segura 1.6.5: pacote em `packages/consulta-processual-segura-1.6.5-home-social-links.zip`.
+- WhatsApp de Atendimento 1.2.2: pacote em `packages/garibalde-whatsapp-assistente-1.2.2.zip`.
+- O manifesto passou a anunciar ambas as versões. A instalação no WordPress e o teste funcional em produção ainda precisam ser confirmados. Para buscar a atualização após publicar, usar Configurações > Garibalde Atualizações > Verificar manifesto e atualizações agora.

@@ -1,3 +1,9 @@
+## Consulta Processual Segura 1.6.5 — pacote de navegação e redes sociais
+- Publicado `packages/consulta-processual-segura-1.6.5-home-social-links.zip`.
+- Corrige navegação/links sociais no cabeçalho preservando o caminho do plugin instalado.
+- Verificações locais registradas: sintaxe PHP e ZIP íntegro. Atualização/validação de produção pendentes.
+- Antes de atualizar, confirmar backup restaurável e testar formulário de senha, portais, links e páginas do site.
+
 ## WhatsApp de Atendimento 1.2.2 — correções de mensagens e cabeçalho
 - Pacote: `garibalde-whatsapp-assistente-1.2.2.zip`.
 - Corrige mensagens antigas no momento do clique; evita saudações, assunto e origem repetidos mesmo com configurações antigas salvas.
