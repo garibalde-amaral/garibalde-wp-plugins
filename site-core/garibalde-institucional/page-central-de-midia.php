@@ -1,5 +1,20 @@
-<?php get_header(); ?>
-<section class="ga-hero"><div class="ga-container"><span class="ga-eyebrow">Central de Mídia</span><h1>Conteúdo jurídico em diferentes formatos.</h1><p>Artigos, notícias e vídeos institucionais, com fontes identificadas e conteúdo sujeito à revisão editorial.</p><p><a class="ga-button" href="<?php echo esc_url(home_url('/central-digital-do-cliente/')); ?>">Falar com a equipe</a></p></div></section>
+<?php
+get_header();
+$ga_media_all = function_exists('ga_core_primary_page_slides') ? ga_core_primary_page_slides('central-de-midia') : array();
+$ga_media_slides = array_values(array_filter($ga_media_all,function($slide){return !empty($slide['url']);}));
+$ga_media_json = wp_json_encode(array_map(function($slide){return array('id'=>$slide['id'],'title'=>$slide['title'],'description'=>$slide['description'],'image'=>$slide['url']);},$ga_media_slides),JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+?>
+<?php if(!empty($ga_media_slides)): ?>
+<section class="ga-hero ga-hero--carousel" data-ga-carousel data-ga-interval="7000" data-ga-slides="<?php echo esc_attr($ga_media_json); ?>">
+ <div class="ga-hero-media" aria-hidden="true">
+ <?php foreach($ga_media_slides as $i=>$slide): ?><img class="ga-hero-media-slide<?php echo $i===0?' is-active':''; ?>" src="<?php echo esc_url($slide['url']); ?>" alt="" loading="<?php echo $i===0?'eager':'lazy'; ?>" decoding="async" data-ga-slide="<?php echo (int)$i; ?>"><?php endforeach; ?>
+ </div>
+ <div class="ga-container ga-hero-content"><span class="ga-eyebrow">Central de Mídia</span><h1 data-ga-title><?php echo esc_html($ga_media_slides[0]['title']); ?></h1><p data-ga-description><?php echo esc_html($ga_media_slides[0]['description']); ?></p><a class="ga-button" href="<?php echo esc_url(home_url('/central-digital-do-cliente/')); ?>">Falar com a equipe</a></div>
+ <div class="ga-hero-controls" aria-label="Controles do destaque da mídia"><button type="button" data-ga-prev aria-label="Slide anterior">‹</button><button type="button" data-ga-pause aria-pressed="false" aria-label="Pausar transição">Ⅱ</button><span data-ga-count aria-live="polite">1 / <?php echo count($ga_media_slides); ?></span><button type="button" data-ga-next aria-label="Próximo slide">›</button></div>
+</section>
+<?php else: ?>
+<section class="ga-hero ga-hero--text-only"><div class="ga-container ga-hero-content"><span class="ga-eyebrow">Central de Mídia</span><h1>Conteúdo jurídico em diferentes formatos.</h1><p>Artigos, notícias e vídeos institucionais, com fontes identificadas e conteúdo sujeito à revisão editorial.</p><a class="ga-button" href="<?php echo esc_url(home_url('/central-digital-do-cliente/')); ?>">Falar com a equipe</a></div></section>
+<?php endif; ?>
 <section class="ga-section"><div class="ga-container">
  <span class="ga-eyebrow">Vídeos e entrevistas</span><h2 class="ga-heading">Vídeos</h2>
  <div class="ga-posts">
