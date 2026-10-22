@@ -175,7 +175,9 @@
       "source_required": true,
       "brief": "Retratos reais da equipe, fornecidos e autorizados pelo escritório. Não gerar rostos fictícios para representar profissionais reais.",
       "prompt": null,
-      "display_alt_pt": "Retratos reais da equipe, fornecidos e autorizados pelo escritório. Não gerar rostos fictícios para representar profissionais reais."
+      "display_alt_pt": "Retratos reais da equipe, fornecidos e autorizados pelo escritório. Não gerar rostos fictícios para representar profissionais reais.",
+      "source_status": "provided_original_portrait_in_visual_master_book",
+      "source_note": "The project branch includes this original portrait converted to WebP without facial retouching; do not generate a substitute face."
     },
     {
       "id": "EQ-02",
@@ -435,7 +437,9 @@
       "source_required": true,
       "brief": "Exige fotografia real, atual e autorizada da fachada/entorno do endereço do escritório. Não gerar uma fachada fictícia como se fosse o local verdadeiro.",
       "prompt": null,
-      "display_alt_pt": "Exige fotografia real, atual e autorizada da fachada/entorno do endereço do escritório. Não gerar uma fachada fictícia como se fosse o local verdadeiro."
+      "display_alt_pt": "Exige fotografia real, atual e autorizada da fachada/entorno do endereço do escritório. Não gerar uma fachada fictícia como se fosse o local verdadeiro.",
+      "source_status": "pending_real_office_photo",
+      "implementation_note": "Do not fabricate the actual office facade. Location page uses a real map and route links until an authorized office photo exists."
     },
     {
       "id": "LOC-02",
@@ -448,7 +452,13 @@
       "source_required": true,
       "brief": "Exige vista real e verificada de Anápolis, GO, com origem/localização confirmada. Não inventar pontos de referência.",
       "prompt": null,
-      "display_alt_pt": "Exige vista real e verificada de Anápolis, GO, com origem/localização confirmada. Não inventar pontos de referência."
+      "display_alt_pt": "Exige vista real e verificada de Anápolis, GO, com origem/localização confirmada. Não inventar pontos de referência.",
+      "source_status": "real_source_downloaded_by_build_pipeline",
+      "source_url": "https://commons.wikimedia.org/wiki/File:Vista_A%C3%A9rea_de_An%C3%A1polis,_2023.jpg",
+      "author": "Samuel Sousa (Wikimedia user Samuel017sousa)",
+      "license": "CC BY-SA 4.0",
+      "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "source_note": "The theme build downloads the real city photograph and converts it to WebP; a visible attribution is shown on the Location page."
     },
     {
       "id": "LOC-03",
@@ -461,7 +471,9 @@
       "source_required": true,
       "brief": "Usar mapa oficial incorporado ou link de navegação, nunca mapa gerado por IA.",
       "prompt": null,
-      "display_alt_pt": "Usar mapa oficial incorporado ou link de navegação, nunca mapa gerado por IA."
+      "display_alt_pt": "Usar mapa oficial incorporado ou link de navegação, nunca mapa gerado por IA.",
+      "source_status": "implemented_as_native_live_map_embed",
+      "implementation_note": "Rendered as a responsive Google Maps embed in page-localizacao.php; do not generate a static map image."
     },
     {
       "id": "LOC-04",
@@ -474,7 +486,9 @@
       "source_required": true,
       "brief": "Exige fotografia real e verificada da via/acesso ao bairro; não inventar sinalização ou rota.",
       "prompt": null,
-      "display_alt_pt": "Exige fotografia real e verificada da via/acesso ao bairro; não inventar sinalização ou rota."
+      "display_alt_pt": "Exige fotografia real e verificada da via/acesso ao bairro; não inventar sinalização ou rota.",
+      "source_status": "implemented_as_verified_navigation_links",
+      "implementation_note": "Rendered as Google Maps and Waze route shortcuts; do not fabricate a street photograph or route."
     },
     {
       "id": "ADMINISTRATIVO_E_CONTRATOS_PUBLICOS-01",
@@ -1601,5 +1615,12 @@
       "brief": "Reflexos abstratos de vidro e aço em um distrito financeiro moderno.",
       "prompt": "Photorealistic editorial photograph for the Brazilian law practice area \"Direito Tributário\". Scene: Reflexos abstratos de vidro e aço em um distrito financeiro moderno. Use restrained warm institutional color grading (coffee brown, warm graphite, ivory, muted brass-gold highlights), natural light, crisp realistic detail, contemporary architecture or professional setting, elegant and credible; do not make it look like a courtroom TV drama or advertising stock. No text, no letters, no watermarks, no trademarks, no real court/government/party/team logos, no legible personal or financial data, no fabricated legal documents. Wide 16:9 landscape composition."
     }
-  ]
+  ],
+  "status_notes": {
+    "original_portrait_committed": "EQ-01 is present in the theme and is an actual source portrait from the user-provided Visual Master Book.",
+    "licensed_city_photo": "LOC-02 is sourced from Wikimedia Commons under CC BY-SA 4.0 with visible attribution.",
+    "location_components": "LOC-03 and LOC-04 are implemented as live map/navigation components rather than generated still images.",
+    "remaining_actual_source": "LOC-01 real office facade/entrance image remains absent; the site uses map and route UI rather than a fabricated facade.",
+    "ai_generation": "106 canonical scene assets have prompts and will be generated locally through the supplied ComfyUI automation; this environment has no connected ComfyUI server so those 106 files have not yet been generated here."
+  }
 }
