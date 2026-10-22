@@ -1,0 +1,92 @@
+{
+  "name": "GA Core — Recepção Editorial com Segurança",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ga-core-editorial-inbox",
+        "responseMode": "responseNode",
+        "options": {},
+        "authentication": "headerAuth"
+      },
+      "id": "ga-inbox-webhook",
+      "name": "Receber pauta",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -600,
+        0
+      ],
+      "webhookId": "ga-core-editorial-inbox"
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $json.body ?? $json;\nconst title = String(d.title ?? '').trim();\nconst content = String(d.content ?? '').trim();\nconst source_url = String(d.source_url ?? '').trim();\nif (!title || !content) throw new Error('title e content são obrigatórios.');\nif (title.length > 180) throw new Error('title excede 180 caracteres.');\nif (content.length > 60000) throw new Error('content excede 60000 caracteres.');\nif (source_url && !/^https:\\/\\//i.test(source_url)) throw new Error('source_url deve usar HTTPS.');\nconst key = String(d.external_id ?? '').trim();\nif (!key) throw new Error('external_id obrigatório para rastreabilidade e deduplicação.');\nreturn [{json:{external_id:key,title,content,excerpt:String(d.excerpt??'').slice(0,500),source_url,editorial_status:'pending_review',publish_automatically:false,received_at:new Date().toISOString()}}];"
+      },
+      "id": "ga-inbox-validate",
+      "name": "Validar e normalizar",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -340,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok: true, status: 'validado_para_revisao', publish_automatically: false, external_id: $json.external_id, title: $json.title, editorial_status: $json.editorial_status } }}",
+        "options": {
+          "responseCode": 202
+        }
+      },
+      "id": "ga-inbox-response",
+      "name": "Retornar pendência de revisão",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -80,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Receber pauta": {
+      "main": [
+        [
+          {
+            "node": "Validar e normalizar",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar e normalizar": {
+      "main": [
+        [
+          {
+            "node": "Retornar pendência de revisão",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all"
+  },
+  "versionId": "2.0.0",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": [
+    {
+      "name": "Garibalde Core"
+    }
+  ]
+}
