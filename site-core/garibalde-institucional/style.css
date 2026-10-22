@@ -111,3 +111,14 @@ Text Domain: ga-core
  .ga-hero-media-slide,.ga-area-card-image img,.ga-post-image img,.ga-text-link span{transition:none!important}
  .ga-hero-media-slide:not(.is-active){display:none}
 }
+
+.ga-location-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(260px,.8fr);align-items:start;gap:1.5rem}
+.ga-location-map{min-width:0}
+.ga-location-map iframe{display:block;width:100%;max-width:100%;border-radius:var(--ga-radius);box-shadow:var(--ga-shadow)}
+.ga-location-card{background:#fff;border:1px solid var(--ga-line);border-radius:var(--ga-radius);padding:1.35rem;overflow-wrap:anywhere}
+.ga-location-card address{font-style:normal;font-weight:600}
+.ga-location-city-photo{margin:1.25rem 0 0}
+.ga-location-city-photo img{display:block;width:100%;max-height:360px;object-fit:cover;border-radius:10px}
+.ga-location-city-photo figcaption{font-size:.78rem;line-height:1.5;color:var(--ga-muted);margin-top:.45rem}
+.ga-location-city-photo figcaption a{color:var(--ga-ink)}
+@media(max-width:760px){.ga-location-grid{grid-template-columns:1fr}.ga-location-map iframe{height:320px}}
