@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build clean 16:9-ish homepage image assets from the three existing approved banner files.
+"""Build clearly labeled temporary homepage preview crops from the three existing banner files. These are not canonical photo masters and must not replace HOME-01.webp through HOME-04.webp.
 
 The source banners contain baked-in headline text. This script crops that text region away so
 the theme can render accessible, editable HTML headlines and one consistent call-to-action.
@@ -10,11 +10,11 @@ from PIL import Image, ImageOps
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCE = ROOT / "packages"
-TARGET = ROOT / "site-core" / "garibalde-institucional" / "assets" / "images" / "home"
+TARGET = ROOT / "site-core" / "garibalde-institucional" / "assets" / "images" / "home-preview"
 ASSETS = (
-    ("slide-1.png", "HOME-01.webp"),
-    ("slide-2.png", "HOME-02.webp"),
-    ("slide-3.png", "HOME-03.webp"),
+    ("slide-1.png", "slide-1-preview.webp"),
+    ("slide-2.png", "slide-2-preview.webp"),
+    ("slide-3.png", "slide-3-preview.webp"),
 )
 
 def main() -> None:
