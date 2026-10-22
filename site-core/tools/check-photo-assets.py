@@ -10,7 +10,9 @@ SITE = ROOT / "site-core"
 THEME = SITE / "garibalde-institucional"
 MANIFEST = SITE / "photo-manifest-111.json"
 VIRTUAL_ASSETS = {
-    "LOC-03": "official Google Maps embed in page-localizacao.php",
+    "LOC-01": "real office address plus official map/route fallback; no invented facade photo",
+    "LOC-03": "official live Google Maps embed in page-localizacao.php",
+    "LOC-04": "verified Google Maps and Waze route links in page-localizacao.php",
 }
 
 manifest=json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -23,11 +25,18 @@ for asset in manifest["assets"]:
     if asset_id in VIRTUAL_ASSETS:
         page=THEME/"page-localizacao.php"
         code=page.read_text(encoding="utf-8") if page.exists() else ""
-        ok = "maps?q=" in code and "output=embed" in code and "waze.com/ul" in code
+        if asset_id == "LOC-01":
+            ok = "Rua Senador Alfredo Nasser" in code and "maps?q=" in code and "output=embed" in code
+        elif asset_id == "LOC-03":
+            ok = "maps?q=" in code and "output=embed" in code
+        elif asset_id == "LOC-04":
+            ok = "google.com/maps/dir/" in code and "waze.com/ul" in code
+        else:
+            ok = False
         if ok:
             virtual.append({"id":asset_id,"implementation":VIRTUAL_ASSETS[asset_id]})
         else:
-            invalid.append({"id":asset_id,"error":"real map/navigation component not verified"})
+            invalid.append({"id":asset_id,"error":"real address/map/navigation component not verified"})
         continue
     dest=THEME/asset["destination"]/asset["filename"]
     if not dest.is_file():
