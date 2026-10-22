@@ -1,1 +1,45 @@
-(function(){'use strict';var nav=document.querySelector('.ga-primary-nav');var toggle=document.querySelector('.ga-menu-toggle');if(!nav||!toggle)return;toggle.addEventListener('click',function(){var isOpen=nav.classList.toggle('is-open');toggle.setAttribute('aria-expanded',isOpen?'true':'false');});document.addEventListener('keydown',function(e){if(e.key==='Escape'&&nav.classList.contains('is-open')){nav.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.focus();}});var hero=document.querySelector('#ga-hero');if(hero){var slides=[{title:'Advocacia e Consultoria Empresarial e Tributária',description:'Estratégia jurídica, visão empresarial e informação responsável.',image:hero.getAttribute('data-slide-1')||''},{title:'Experiência, técnica e atuação institucional',description:'Conteúdo jurídico organizado e canais digitais claros.',image:hero.getAttribute('data-slide-2')||''},{title:'Atendimento digital com o canal correto',description:'Acesse a Central Digital do Cliente para o atendimento geral.',image:hero.getAttribute('data-slide-3')||''}];var index=0;var title=hero.querySelector('h1');var paragraph=hero.querySelector('.ga-hero-slide p');var counter=hero.querySelector('[data-ga-slide-count]');function renderSlide(next){index=(next+slides.length)%slides.length;title.textContent=slides[index].title;paragraph.textContent=slides[index].description;counter.textContent=(index+1)+' / '+slides.length;if(slides[index].image){hero.style.setProperty('--ga-hero-image','url("'+slides[index].image.replace(/["\\]/g,'')+'")');}}var prev=hero.querySelector('[data-ga-slide-prev]');var next=hero.querySelector('[data-ga-slide-next]');if(prev)prev.addEventListener('click',function(){renderSlide(index-1);});if(next)next.addEventListener('click',function(){renderSlide(index+1);});}})();
+(function(){
+'use strict';
+var nav=document.querySelector('.ga-primary-nav');
+var toggle=document.querySelector('.ga-menu-toggle');
+if(nav && toggle){
+ toggle.addEventListener('click',function(){
+  var isOpen=nav.classList.toggle('is-open');
+  toggle.setAttribute('aria-expanded',isOpen?'true':'false');
+ });
+ document.addEventListener('keydown',function(e){
+  if(e.key==='Escape' && nav.classList.contains('is-open')){
+   nav.classList.remove('is-open');
+   toggle.setAttribute('aria-expanded','false');
+   toggle.focus();
+  }
+ });
+}
+var hero=document.querySelector('#ga-hero');
+if(hero){
+ var slides=[];
+ try { slides=JSON.parse(hero.getAttribute('data-ga-slides')||'[]'); } catch(e) { slides=[]; }
+ var index=0;
+ var title=hero.querySelector('h1');
+ var paragraph=hero.querySelector('.ga-hero-slide p');
+ var counter=hero.querySelector('[data-ga-slide-count]');
+ function renderSlide(nextIndex){
+  if(!slides.length || !title || !paragraph || !counter) return;
+  index=(nextIndex+slides.length)%slides.length;
+  title.textContent=slides[index].title||'';
+  paragraph.textContent=slides[index].description||'';
+  counter.textContent=(index+1)+' / '+slides.length;
+  var image=String(slides[index].image||'');
+  if(image && /^https:\/\/|^\/\//i.test(image)){
+   hero.style.setProperty('--ga-hero-image','url("'+image.replace(/["\\\\]/g,'')+'")');
+  } else {
+   hero.style.setProperty('--ga-hero-image','linear-gradient(135deg,#49382e,#a08a6b)');
+  }
+ }
+ var prev=hero.querySelector('[data-ga-slide-prev]');
+ var next=hero.querySelector('[data-ga-slide-next]');
+ if(prev) prev.addEventListener('click',function(){renderSlide(index-1);});
+ if(next) next.addEventListener('click',function(){renderSlide(index+1);});
+ renderSlide(0);
+}
+})();
