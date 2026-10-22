@@ -7,10 +7,10 @@ on:
     paths:
       - 'site-core/**'
       - '.github/workflows/ga-core-validation.yml'
-      - 'packages/**'
   pull_request:
     paths:
       - 'site-core/**'
+      - '.github/workflows/ga-core-validation.yml'
 
 permissions:
   contents: read
@@ -20,11 +20,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: PHP syntax
         run: |
           find site-core/garibalde-institucional -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+
       - name: JavaScript syntax
         run: node --check site-core/garibalde-institucional/assets/site.js
+
       - name: Validate n8n workflow JSON and embedded code
         run: |
           python - <<'PY'
@@ -47,49 +50,56 @@ jobs:
               if (node.type === 'n8n-nodes-base.code') {
                 try { new Function(node.parameters.jsCode); }
                 catch (error) { console.error(file + ' / ' + node.name + ': ' + error.message); process.exit(1); }
-                console.log('Embedded JS OK: ' + file + ' / ' + node.name);
               }
             }
           }
           NODE
+
       - name: Validate canonical photo manifest
         run: |
           python site-core/tools/test-photo-manifest.py
-          python -m py_compile site-core/tools/prepare-home-slides.py site-core/tools/generate-photo-masters.py site-core/tools/test-photo-manifest.py site-core/tools/fetch-real-source-assets.py
-      - name: Check theme minimum files
+          python -m py_compile site-core/tools/generate-photo-masters.py site-core/tools/fetch-real-source-assets.py site-core/tools/check-photo-assets.py site-core/tools/test-photo-manifest.py
+
+      - name: Check theme minimum files and image mapping
         run: |
           test -s site-core/garibalde-institucional/style.css
           test -s site-core/garibalde-institucional/functions.php
           test -s site-core/garibalde-institucional/index.php
-      - name: Build clean homepage slides from prepared source images
-        run: |
-          python -m pip install --disable-pip-version-check Pillow
-          python site-core/tools/prepare-home-slides.py
-          test -s site-core/garibalde-institucional/assets/images/home-preview/slide-1-preview.webp
-          test -s site-core/garibalde-institucional/assets/images/home-preview/slide-2-preview.webp
-          test -s site-core/garibalde-institucional/assets/images/home-preview/slide-3-preview.webp
-      - name: Import real-source photo assets and preserve license credits
-        run: |
-          python site-core/tools/fetch-real-source-assets.py
-          test -s site-core/garibalde-institucional/assets/images/pages/LOC-02.webp
-          grep -q 'CC BY-SA 4.0' site-core/PHOTO-CREDITS.md
-      - name: Check canonical photo mapping logic
-        run: |
+          test -s site-core/garibalde-institucional/page-localizacao.php
           grep -q 'function ga_core_primary_page_slides' site-core/garibalde-institucional/inc/areas.php
           grep -q 'function ga_core_get_area_images' site-core/garibalde-institucional/inc/areas.php
           grep -q 'DIREITO_TRIBUTARIO-01.webp' site-core/garibalde-institucional/inc/areas.php
           grep -q 'RELACAO_DE_CONSUMO-05.webp' site-core/garibalde-institucional/inc/areas.php
           test -s site-core/garibalde-institucional/single-ga_area_atuacao.php
           test -s site-core/garibalde-institucional/page-area-de-atuacao.php
-      - name: Package theme ZIP
+
+      - name: Fetch verified real-source assets
+        id: source_assets
+        continue-on-error: true
+        run: python site-core/tools/fetch-real-source-assets.py
+
+      - name: Require complete canonical photo set before packaging
+        id: photo_check
+        continue-on-error: true
+        run: python site-core/tools/check-photo-assets.py
+
+      - name: Package complete theme ZIP
+        if: steps.photo_check.outcome == 'success'
         run: |
           cd site-core
           zip -r garibalde-institucional-2.0.0.zip garibalde-institucional
           unzip -t garibalde-institucional-2.0.0.zip
-      - name: Upload theme artifact
+
+      - name: Publish installable theme artifact
+        if: steps.photo_check.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
-          name: garibalde-institucional-2.0.0
+          name: garibalde-institucional-2.0.0-complete
           path: site-core/garibalde-institucional-2.0.0.zip
           if-no-files-found: error
           retention-days: 30
+
+      - name: Explain why no installable ZIP was made
+        if: steps.photo_check.outcome != 'success'
+        run: |
+          echo "::warning::Static checks passed, but the canonical photograph set is incomplete. No installable ZIP was generated. Run GERAR-FOTOS-E-MONTAR.bat with a local ComfyUI SDXL checkpoint and real-source photos; the script refuses to package missing photos."
