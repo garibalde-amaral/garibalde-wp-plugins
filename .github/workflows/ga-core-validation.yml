@@ -39,6 +39,12 @@ jobs:
           test -s site-core/garibalde-institucional/style.css
           test -s site-core/garibalde-institucional/functions.php
           test -s site-core/garibalde-institucional/index.php
+      - name: Include selected slide assets in theme
+        run: |
+          mkdir -p site-core/garibalde-institucional/assets/images/slides
+          cp packages/slide-1.png site-core/garibalde-institucional/assets/images/slides/slide-1.png
+          cp packages/slide-2.png site-core/garibalde-institucional/assets/images/slides/slide-2.png
+          cp packages/slide-3.png site-core/garibalde-institucional/assets/images/slides/slide-3.png
       - name: Package theme ZIP
         run: |
           cd site-core
