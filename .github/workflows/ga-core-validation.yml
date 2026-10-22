@@ -7,6 +7,7 @@ on:
     paths:
       - 'site-core/**'
       - '.github/workflows/ga-core-validation.yml'
+      - 'packages/**'
   pull_request:
     paths:
       - 'site-core/**'
@@ -24,7 +25,7 @@ jobs:
           find site-core/garibalde-institucional -type f -name '*.php' -print0 | xargs -0 -n1 php -l
       - name: JavaScript syntax
         run: node --check site-core/garibalde-institucional/assets/site.js
-      - name: Validate n8n workflow JSON
+      - name: Validate n8n workflow JSON and embedded code
         run: |
           python - <<'PY'
           import json, pathlib
@@ -32,8 +33,25 @@ jobs:
               data = json.loads(path.read_text(encoding='utf-8'))
               assert data.get('nodes'), f'{path}: missing nodes'
               assert data.get('connections') is not None, f'{path}: missing connections'
-              print(f'OK: {path}')
+              for node in data['nodes']:
+                  if node.get('type') == 'n8n-nodes-base.code':
+                      assert isinstance(node.get('parameters', {}).get('jsCode'), str), f'{path}: {node.get("name")} missing jsCode'
+              print(f'JSON OK: {path}')
           PY
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          for (const file of fs.readdirSync('site-core/n8n').filter(f => f.endsWith('.json'))) {
+            const workflow = JSON.parse(fs.readFileSync(path.join('site-core/n8n', file), 'utf8'));
+            for (const node of workflow.nodes || []) {
+              if (node.type === 'n8n-nodes-base.code') {
+                try { new Function(node.parameters.jsCode); }
+                catch (error) { console.error(file + ' / ' + node.name + ': ' + error.message); process.exit(1); }
+                console.log('Embedded JS OK: ' + file + ' / ' + node.name);
+              }
+            }
+          }
+          NODE
       - name: Check theme minimum files
         run: |
           test -s site-core/garibalde-institucional/style.css
