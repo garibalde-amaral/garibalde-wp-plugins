@@ -25,6 +25,17 @@ assert len(blocked) == 5, f"expected 5 source-required assets, got {len(blocked)
 assert all(not a.get("prompt") for a in blocked), "real-source assets must not have generative prompts"
 assert all(a.get("prompt") and a.get("filename", "").endswith(".webp") for a in eligible)
 
+
+# Real-source and privacy guardrails.
+by_id = {a["id"]: a for a in assets}
+assert by_id["EQ-01"].get("source_status") == "provided_original_portrait_in_visual_master_book"
+assert (ROOT / "site-core/garibalde-institucional/assets/images/pages/EQ-01.webp").is_file(), "real source portrait EQ-01 missing"
+assert by_id["LOC-01"].get("source_status") == "pending_real_office_photo"
+assert by_id["LOC-02"].get("license") == "CC BY-SA 4.0"
+assert by_id["LOC-03"].get("source_status") == "implemented_as_native_live_map_embed"
+assert by_id["LOC-04"].get("source_status") == "implemented_as_verified_navigation_links"
+assert all(not a.get("prompt") for a in blocked), "real-source assets must not have generative prompts"
+
 areas = {}
 for asset in assets:
     if asset.get("type") == "practice_area":
