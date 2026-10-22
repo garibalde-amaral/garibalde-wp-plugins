@@ -15,7 +15,7 @@ $ga_home_slides = array_values(array_filter(array_map(function($slide) {
 }, $ga_home_slides)));
 $ga_all_slides_json = wp_json_encode($ga_home_slides, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 $ga_first_slide = ! empty($ga_home_slides) ? $ga_home_slides[0] : array('title'=>'Garibalde Amaral Advogados Associados','description'=>'Informação jurídica responsável, organização e atendimento digital.','image'=>'');
-
+?>
 <section class="ga-hero ga-hero--carousel" id="ga-hero" data-ga-carousel data-ga-home data-ga-slides="<?php echo esc_attr($ga_all_slides_json); ?>" data-ga-interval="7000">
  <div class="ga-hero-media" aria-hidden="true">
   <?php foreach($ga_home_slides as $i=>$slide): ?>
