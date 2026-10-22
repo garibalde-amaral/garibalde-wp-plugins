@@ -30,6 +30,13 @@ $map_embed = 'https://www.google.com/maps?q=' . $address_query . '&output=embed'
     referrerpolicy="no-referrer-when-downgrade"
     allowfullscreen></iframe>
    <p class="ga-meta">O mapa é carregado do serviço cartográfico externo; a rota é calculada no aplicativo escolhido.</p>
+   <?php $city_photo = function_exists('ga_core_primary_page_asset_url') ? ga_core_primary_page_asset_url('LOC-02.webp') : ''; ?>
+   <?php if($city_photo): ?>
+    <figure class="ga-location-city-photo">
+     <img src="<?php echo esc_url($city_photo); ?>" alt="Vista aérea real de Anápolis, Goiás, em 2023." loading="lazy" decoding="async">
+     <figcaption>Vista aérea de Anápolis, 2023. Foto: Samuel Sousa / Wikimedia Commons. <a href="https://commons.wikimedia.org/wiki/File:Vista_A%C3%A9rea_de_An%C3%A1polis,_2023.jpg" target="_blank" rel="noopener noreferrer">Fonte original</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">CC BY-SA 4.0</a>. Imagem convertida para WebP.</figcaption>
+    </figure>
+   <?php endif; ?>
   </div>
   <aside class="ga-location-card">
    <span class="ga-eyebrow">Endereço institucional</span>
