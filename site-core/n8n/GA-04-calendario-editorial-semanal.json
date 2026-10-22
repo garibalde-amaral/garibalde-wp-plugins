@@ -72,16 +72,12 @@
     },
     {
       "parameters": {
-        "respondWith": "json",
-        "responseBody": "={{ {ok:true,status:'calendar_draft_created',wp_post_id:$json.id,wp_status:$json.status,title:$json.title,link:$json.link,message:'Agenda semanal criada como rascunho; os itens não foram publicados.'} }}",
-        "options": {
-          "responseCode": 201
-        }
+        "jsCode": "const post=$json;\nif (!post.id || post.status!=='draft') throw new Error('O WordPress não confirmou a criação da agenda como rascunho.');\nreturn [{json:{ok:true,status:'calendar_draft_created',wp_post_id:post.id,wp_status:post.status,title:post.title?.rendered||'Calendário editorial semanal',link:post.link,agenda_items:5,items_published:false,message:'Agenda criada como rascunho; nenhum item do calendário foi publicado.'}}];"
       },
       "id": "ga-calendar-result",
-      "name": "Registrar resultado confirmado",
-      "type": "n8n-nodes-base.respondToWebhook",
-      "typeVersion": 1.1,
+      "name": "Confirmar agenda criada",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
       "position": [
         190,
         100
