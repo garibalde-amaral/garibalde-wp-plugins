@@ -143,3 +143,70 @@ function ga_core_admin_asset_notice() {
     );
 }
 add_action('admin_notices', 'ga_core_admin_asset_notice');
+
+
+/**
+ * Canonical photo mapping from the Visual Master Book for the eight secondary
+ * primary destinations. HOME has its own three-slide set while final masters are produced.
+ */
+function ga_core_primary_page_catalog() {
+    return array(
+        'quem-somos'=>array('code'=>'QS','label'=>'Quem Somos','title'=>'Conheça a história e o método de trabalho.','description'=>'Informação institucional, princípios de atuação e compromisso com a clareza.'),
+        'area-de-atuacao'=>array('code'=>'AA','label'=>'Áreas de Atuação','title'=>'Especialidades jurídicas organizadas para facilitar sua consulta.','description'=>'Explore as áreas e encontre conteúdos gerais relacionados a cada especialidade.'),
+        'areas-de-atuacao'=>array('code'=>'AA','label'=>'Áreas de Atuação','title'=>'Especialidades jurídicas organizadas para facilitar sua consulta.','description'=>'Explore as áreas e encontre conteúdos gerais relacionados a cada especialidade.'),
+        'equipe'=>array('code'=>'EQ','label'=>'Equipe','title'=>'Pessoas, experiência e trabalho em conjunto.','description'=>'Conheça a equipe e a estrutura de trabalho do escritório.'),
+        'artigos'=>array('code'=>'ART','label'=>'Artigos e Notícias','title'=>'Informação jurídica com contexto e fontes.','description'=>'Conteúdo informativo organizado por tema, data e origem.'),
+        'noticias-artigos'=>array('code'=>'ART','label'=>'Artigos e Notícias','title'=>'Informação jurídica com contexto e fontes.','description'=>'Conteúdo informativo organizado por tema, data e origem.'),
+        'clientes'=>array('code'=>'CLI','label'=>'Clientes','title'=>'Informação e canais institucionais para clientes.','description'=>'Consulte os recursos disponíveis e selecione o canal correto para a sua necessidade.'),
+        'links-uteis'=>array('code'=>'LU','label'=>'Links Úteis','title'=>'Recursos de referência em um só lugar.','description'=>'Acesse fontes e serviços institucionais relevantes.'),
+        'contato'=>array('code'=>'CONT','label'=>'Contato','title'=>'Encontre o canal adequado para sua solicitação.','description'=>'Para atendimento geral, comece pela Central Digital do Cliente.'),
+        'fale-conosco'=>array('code'=>'CONT','label'=>'Contato','title'=>'Encontre o canal adequado para sua solicitação.','description'=>'Para atendimento geral, comece pela Central Digital do Cliente.'),
+        'localizacao'=>array('code'=>'LOC','label'=>'Localização','title'=>'Localização e orientações para chegar ao escritório.','description'=>'Consulte o endereço institucional e abra o aplicativo de navegação de sua preferência.'),
+    );
+}
+
+function ga_core_primary_page_slides($page_slug) {
+    $catalog = ga_core_primary_page_catalog();
+    $page_slug = sanitize_title((string)$page_slug);
+    if ( ! isset($catalog[$page_slug]) ) { return array(); }
+    $item = $catalog[$page_slug];
+    $slides = array();
+    for ( $i = 1; $i <= 4; $i++ ) {
+        $filename = $item['code'] . '-' . sprintf('%02d', $i) . '.webp';
+        $slides[] = array(
+            'id' => $item['code'] . '-' . sprintf('%02d', $i),
+            'file' => $filename,
+            'title' => $item['title'],
+            'description' => $item['description'],
+            'url' => ga_core_primary_page_asset_url($filename),
+        );
+    }
+    return $slides;
+}
+
+function ga_core_primary_page_asset_url($filename) {
+    $filename = sanitize_file_name((string)$filename);
+    if ( ! $filename ) { return ''; }
+    $relative = 'assets/images/pages/' . $filename;
+    $base = trailingslashit(get_template_directory()) . $relative;
+    $web = trailingslashit(get_template_directory_uri()) . $relative;
+    if ( is_file($base) ) { return $web . rawurlencode($filename); }
+
+    $attachments = get_posts(array(
+        'post_type' => 'attachment',
+        'post_status' => 'inherit',
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'meta_query' => array(array(
+            'key' => '_wp_attached_file',
+            'value' => '/' . $filename,
+            'compare' => 'LIKE',
+        )),
+    ));
+    if ( ! empty($attachments[0]) ) {
+        $url = wp_get_attachment_image_url((int)$attachments[0], 'full');
+        if ( $url ) { return $url; }
+    }
+    return '';
+}
