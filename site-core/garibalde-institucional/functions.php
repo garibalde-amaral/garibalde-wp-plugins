@@ -22,19 +22,10 @@ function ga_core_body_class($classes){$classes[]='ga-core-site';return $classes;
 
 function ga_core_customize_register( $wp_customize ) {
     $wp_customize->add_section( 'ga_core_identity', array(
-        'title' => __( 'Garibalde — Identidade e Destaques', 'ga-core' ),
+        'title' => __( 'Garibalde — Redes institucionais', 'ga-core' ),
         'priority' => 30,
     ) );
     $fields = array(
-        'ga_slide_1_title' => array( 'Título do destaque 1', 'text', 'Advocacia e Consultoria Empresarial e Tributária' ),
-        'ga_slide_1_description' => array( 'Descrição do destaque 1', 'textarea', 'Estratégia jurídica, visão empresarial e informação responsável.' ),
-        'ga_slide_1_image' => array( 'Imagem do destaque 1 (URL da biblioteca)', 'url', '' ),
-        'ga_slide_2_title' => array( 'Título do destaque 2', 'text', 'Experiência, técnica e atuação institucional' ),
-        'ga_slide_2_description' => array( 'Descrição do destaque 2', 'textarea', 'Conteúdo jurídico organizado e canais digitais claros.' ),
-        'ga_slide_2_image' => array( 'Imagem do destaque 2 (URL da biblioteca)', 'url', '' ),
-        'ga_slide_3_title' => array( 'Título do destaque 3', 'text', 'Atendimento digital com o canal correto' ),
-        'ga_slide_3_description' => array( 'Descrição do destaque 3', 'textarea', 'Acesse a Central Digital do Cliente para o atendimento geral.' ),
-        'ga_slide_3_image' => array( 'Imagem do destaque 3 (URL da biblioteca)', 'url', '' ),
         'ga_instagram_url' => array( 'URL Instagram institucional', 'url', '' ),
         'ga_youtube_url' => array( 'URL YouTube institucional', 'url', '' ),
         'ga_linkedin_url' => array( 'URL LinkedIn institucional', 'url', '' ),
