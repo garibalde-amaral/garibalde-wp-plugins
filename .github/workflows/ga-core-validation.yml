@@ -110,7 +110,9 @@ jobs:
             -x "ga-core-source-and-automation-2.0.0.zip" \
                "garibalde-institucional-2.0.0.zip" \
                "photo-generation-report.json" \
-               "photo-assets-readiness.json"
+               "photo-assets-readiness.json" \
+               "tools/__pycache__/*" \
+               "*/__pycache__/*"
           cd ..
           unzip -t ga-core-source-and-automation-2.0.0.zip
           unzip -l ga-core-source-and-automation-2.0.0.zip | head -40
