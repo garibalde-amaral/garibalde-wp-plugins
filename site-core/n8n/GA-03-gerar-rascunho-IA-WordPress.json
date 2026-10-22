@@ -6,7 +6,8 @@
         "httpMethod": "POST",
         "path": "ga-ai-create-draft",
         "responseMode": "lastNode",
-        "options": {}
+        "options": {},
+        "authentication": "headerAuth"
       },
       "id": "ga-ai-webhook",
       "name": "Receber pauta para rascunho",
@@ -20,7 +21,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const d = $json.body ?? $json;\nconst topic = String(d.topic ?? '').trim();\nconst source_url = String(d.source_url ?? '').trim();\nconst format = String(d.format ?? 'article').trim().toLowerCase();\nconst audience = String(d.audience ?? 'público geral').trim();\nconst request_id = String(d.request_id ?? '').trim();\nif (!topic || topic.length < 8) throw new Error('Informe uma pauta com pelo menos 8 caracteres.');\nif (!/^https:\\/\\//i.test(source_url)) throw new Error('source_url HTTPS é obrigatório.');\nif (!request_id) throw new Error('request_id obrigatório para rastreabilidade.');\nif (!['article','news_summary','video_script','social_post'].includes(format)) throw new Error('format inválido.');\nif (/processo|cliente|cpf|cnpj|senha|prontuário|documento sigiloso/i.test(topic)) throw new Error('Pauta potencialmente sensível; retire dados identificáveis.');\nreturn [{json:{topic,source_url,format,audience,request_id,received_at:new Date().toISOString()}}];"
+        "jsCode": "const d = $json.body ?? $json;\nconst topic = String(d.topic ?? '').trim();\nconst source_url = String(d.source_url ?? '').trim();\nconst format = String(d.format ?? 'article').trim().toLowerCase();\nconst audience = String(d.audience ?? 'público geral').trim();\nconst source_text = String(d.source_text ?? '').trim();\nif (format === 'news_summary' && !source_text) throw new Error('Para resumo de notícia, source_text da fonte primária é obrigatório.');\nif (source_text.length > 25000) throw new Error('source_text excede 25000 caracteres.');\nconst request_id = String(d.request_id ?? '').trim();\nif (!topic || topic.length < 8) throw new Error('Informe uma pauta com pelo menos 8 caracteres.');\nif (!/^https:\\/\\//i.test(source_url)) throw new Error('source_url HTTPS é obrigatório.');\nif (!request_id) throw new Error('request_id obrigatório para rastreabilidade.');\nif (!['article','news_summary','video_script','social_post'].includes(format)) throw new Error('format inválido.');\nif (/processo|cliente|cpf|cnpj|senha|prontuário|documento sigiloso/i.test(topic)) throw new Error('Pauta potencialmente sensível; retire dados identificáveis.');\nreturn [{json:{topic,source_url,source_text,format,audience,request_id,received_at:new Date().toISOString()}}];"
       },
       "id": "ga-ai-validate",
       "name": "Validar pauta e fonte",
@@ -34,14 +35,14 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "={{ ($env.GA_AI_BASE_URL || 'https://api.openai.com/v1') + '/chat/completions' }}",
+        "url": "={{ ($env.GA_AI_BASE_URL || 'http://ollama:11434/v1') + '/chat/completions' }}",
         "authentication": "none",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
             {
               "name": "Authorization",
-              "value": "={{ 'Bearer ' + $env.GA_AI_API_KEY }}"
+              "value": "={{ 'Bearer ' + ($env.GA_AI_API_KEY || 'ollama') }}"
             },
             {
               "name": "Content-Type",
@@ -52,7 +53,7 @@
         "sendBody": true,
         "contentType": "raw",
         "rawContentType": "application/json",
-        "body": "={{ JSON.stringify({model:($env.GA_AI_MODEL || 'gpt-4o-mini'),temperature:0.2,response_format:{type:'json_object'},messages:[{role:'system',content:'Você é assistente de redação jurídica institucional. Gere APENAS um rascunho em português do Brasil e em JSON com as chaves title, excerpt e content. Não invente lei, precedente, processo, data nem citação. Se não houver informação suficiente, explicite a limitação. Linguagem informativa, sem promessa de resultado, sem captação indevida e sem aconselhamento personalizado. Revisão humana obrigatória antes de publicar.'},{role:'user',content:'Formato: '+$json.format+'; público: '+$json.audience+'; pauta: '+$json.topic+'; fonte: '+$json.source_url+'. Use a fonte indicada como ponto de partida, não afirme que abriu seu conteúdo sem acesso real. Produza título, resumo de até 500 caracteres e corpo do rascunho com a URL para conferência.'}]}) }}",
+        "body": "={{ JSON.stringify({model:($env.GA_AI_MODEL || 'qwen2.5:7b'),temperature:0.2,response_format:{type:'json_object'},messages:[{role:'system',content:'Você é assistente de redação jurídica institucional. Gere APENAS um rascunho em português do Brasil e em JSON com as chaves title, excerpt e content. Não invente lei, precedente, processo, data nem citação. Se não houver informação suficiente, explicite a limitação. Linguagem informativa, sem promessa de resultado, sem captação indevida e sem aconselhamento personalizado. Revisão humana obrigatória antes de publicar.'},{role:'user',content:'Formato: '+$json.format+'; público: '+$json.audience+'; pauta: '+$json.topic+'; fonte: '+$json.source_url+'; texto fornecido da fonte: '+($json.source_text || '[não fornecido]')+'. Não afirme que abriu a URL se não tiver acesso real. Use apenas as informações do texto fornecido para resumo de notícia. Produza título, resumo de até 500 caracteres e corpo do rascunho com a URL para conferência.'}]}) }}",
         "options": {
           "timeout": 60000
         }
