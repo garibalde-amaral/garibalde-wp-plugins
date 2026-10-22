@@ -6,7 +6,7 @@ Substituir amplamente a camada de apresentação e templates legados, preservand
 ## Antes de instalar
 - Inventariar tema ativo/child theme, functions.php, widgets, menus, shortcodes, tipos personalizados e metadados.
 - Mapear quais plugins personalizados imprimem cabeçalho/menu, WhatsApp, redes, Consulta Processual e Central Digital; impedir dois componentes donos da mesma área.
-- Mapear as URLs reais e testar status HTTP antes de criar redirects.
+- Mapear as URLs reais e testar status HTTP antes de criar redirects. O menu-base contém 10 itens: Início, Institucional, Áreas de Atuação, Equipe, Clientes, Artigos e Notícias, Central de Mídia, Central Digital do Cliente, Consulta Processual e Contato. Os slugs de cada item precisam ser confirmados no WordPress real.
 - Homologar em cópia restaurada, não apenas confiar que há backups.
 - Desativar um plugin antigo por vez, somente quando a função substituta estiver validada e seus dados preservados.
 
