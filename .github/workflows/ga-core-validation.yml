@@ -65,9 +65,9 @@ jobs:
         run: |
           python -m pip install --disable-pip-version-check Pillow
           python site-core/tools/prepare-home-slides.py
-          test -s site-core/garibalde-institucional/assets/images/home/HOME-01.webp
-          test -s site-core/garibalde-institucional/assets/images/home/HOME-02.webp
-          test -s site-core/garibalde-institucional/assets/images/home/HOME-03.webp
+          test -s site-core/garibalde-institucional/assets/images/home-preview/slide-1-preview.webp
+          test -s site-core/garibalde-institucional/assets/images/home-preview/slide-2-preview.webp
+          test -s site-core/garibalde-institucional/assets/images/home-preview/slide-3-preview.webp
       - name: Check canonical photo mapping logic
         run: |
           grep -q 'function ga_core_primary_page_slides' site-core/garibalde-institucional/inc/areas.php
