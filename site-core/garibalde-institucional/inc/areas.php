@@ -170,14 +170,66 @@ function ga_core_primary_page_slides($page_slug) {
     $page_slug = sanitize_title((string)$page_slug);
     if ( ! isset($catalog[$page_slug]) ) { return array(); }
     $item = $catalog[$page_slug];
+    $narratives = array(
+        'QS' => array(
+            array('title'=>'História e identidade','description'=>'Conheça a trajetória, os valores e a forma de atuação institucional.'),
+            array('title'=>'Método e clareza','description'=>'Organização, análise e comunicação responsável em cada etapa.'),
+            array('title'=>'Compromisso profissional','description'=>'Princípios de trabalho, confidencialidade e atenção às particularidades.'),
+            array('title'=>'Visão de longo prazo','description'=>'Relações profissionais baseadas em clareza, seriedade e confiança.'),
+        ),
+        'AA' => array(
+            array('title'=>'Áreas de atuação','description'=>'Explore a arquitetura de especialidades jurídicas do escritório.'),
+            array('title'=>'Análise por especialidade','description'=>'Cada área reúne temas próprios, documentos relevantes e regras aplicáveis.'),
+            array('title'=>'Informação com contexto','description'=>'Conteúdo informativo para ajudar a identificar o assunto adequado.'),
+            array('title'=>'Atendimento pelo canal correto','description'=>'Para atendimento geral, utilize a Central Digital do Cliente.'),
+        ),
+        'EQ' => array(
+            array('title'=>'Equipe e colaboração','description'=>'Trabalho coordenado, análise técnica e comunicação profissional.'),
+            array('title'=>'Experiência e método','description'=>'A atuação exige estudo, organização e atenção às evidências.'),
+            array('title'=>'Responsabilidade profissional','description'=>'Sigilo, ética e clareza orientam a relação com cada cliente.'),
+            array('title'=>'Atuação institucional','description'=>'Conheça a estrutura do escritório e os canais oficiais.'),
+        ),
+        'ART' => array(
+            array('title'=>'Artigos e notícias','description'=>'Informação jurídica organizada por assunto e data.'),
+            array('title'=>'Fontes identificadas','description'=>'Notícias externas devem apontar para a origem e sua data.'),
+            array('title'=>'Análise própria','description'=>'Comentários e artigos do escritório são distinguidos de notícias de terceiros.'),
+            array('title'=>'Conteúdo relacionado','description'=>'Explore materiais ligados ao mesmo assunto e suas referências.'),
+        ),
+        'CLI' => array(
+            array('title'=>'Área de clientes','description'=>'Acesse recursos institucionais e orientações de navegação.'),
+            array('title'=>'Organização do atendimento','description'=>'Encaminhe sua solicitação pela Central Digital do Cliente.'),
+            array('title'=>'Acesso responsável','description'=>'Utilize apenas canais oficiais e mantenha seus dados protegidos.'),
+            array('title'=>'Consulta processual separada','description'=>'A consulta de processos permanece em página específica.'),
+        ),
+        'LU' => array(
+            array('title'=>'Links úteis','description'=>'Fontes públicas, sistemas oficiais e recursos de referência.'),
+            array('title'=>'Fontes institucionais','description'=>'Prefira endereços oficiais e confira a informação diretamente na origem.'),
+            array('title'=>'Acesso organizado','description'=>'Os recursos são agrupados por finalidade e área.'),
+            array('title'=>'Informação verificável','description'=>'Links de apoio não substituem análise jurídica individualizada.'),
+        ),
+        'CONT' => array(
+            array('title'=>'Fale com a equipe','description'=>'Escolha o canal adequado para a natureza de sua solicitação.'),
+            array('title'=>'Central Digital do Cliente','description'=>'O atendimento geral começa pela Central Digital do Cliente.'),
+            array('title'=>'Mensagem direcionada','description'=>'Solicitações devem indicar um assunto para encaminhamento organizado.'),
+            array('title'=>'Privacidade e clareza','description'=>'Não envie informações sigilosas desnecessárias por formulários públicos.'),
+        ),
+        'LOC' => array(
+            array('title'=>'Localização do escritório','description'=>'Consulte o endereço institucional e planeje sua rota.'),
+            array('title'=>'Navegação por aplicativo','description'=>'Abra o destino em seu aplicativo de mapas preferido.'),
+            array('title'=>'Endereço institucional','description'=>'Confira os dados do destino antes de iniciar o deslocamento.'),
+            array('title'=>'Atendimento e chegada','description'=>'Para dúvidas antes da visita, utilize a Central Digital do Cliente.'),
+        ),
+    );
+    $copy = isset($narratives[$item['code']]) ? $narratives[$item['code']] : array();
     $slides = array();
     for ( $i = 1; $i <= 4; $i++ ) {
         $filename = $item['code'] . '-' . sprintf('%02d', $i) . '.webp';
+        $narrative = isset($copy[$i-1]) ? $copy[$i-1] : array('title'=>$item['title'],'description'=>$item['description']);
         $slides[] = array(
             'id' => $item['code'] . '-' . sprintf('%02d', $i),
             'file' => $filename,
-            'title' => $item['title'],
-            'description' => $item['description'],
+            'title' => $narrative['title'],
+            'description' => $narrative['description'],
             'url' => ga_core_primary_page_asset_url($filename),
         );
     }
