@@ -5,7 +5,7 @@
       "parameters": {
         "httpMethod": "POST",
         "path": "ga-core-editorial-inbox",
-        "responseMode": "lastNode",
+        "responseMode": "responseNode",
         "options": {},
         "authentication": "headerAuth"
       },
