@@ -11,7 +11,6 @@ THEME = SITE / "garibalde-institucional"
 MANIFEST = SITE / "photo-manifest-111.json"
 VIRTUAL_ASSETS = {
     "LOC-03": "official Google Maps embed in page-localizacao.php",
-    "LOC-04": "verified Google Maps and Waze route links in page-localizacao.php",
 }
 
 manifest=json.loads(MANIFEST.read_text(encoding="utf-8"))
@@ -24,12 +23,7 @@ for asset in manifest["assets"]:
     if asset_id in VIRTUAL_ASSETS:
         page=THEME/"page-localizacao.php"
         code=page.read_text(encoding="utf-8") if page.exists() else ""
-        if asset_id == "LOC-03":
-            ok = "maps?q=" in code and "output=embed" in code
-        elif asset_id == "LOC-04":
-            ok = "google.com/maps/dir/" in code and "waze.com/ul" in code
-        else:
-            ok = False
+        ok = "maps?q=" in code and "output=embed" in code and "waze.com/ul" in code
         if ok:
             virtual.append({"id":asset_id,"implementation":VIRTUAL_ASSETS[asset_id]})
         else:
