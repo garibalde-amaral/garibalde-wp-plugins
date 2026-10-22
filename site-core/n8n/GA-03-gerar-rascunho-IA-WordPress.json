@@ -84,14 +84,10 @@
       "parameters": {
         "method": "POST",
         "url": "={{ $env.GA_WP_BASE_URL.replace(/\\/$/,'') + '/wp-json/wp/v2/posts' }}",
-        "authentication": "none",
+        "authentication": "genericCredentialType",
         "sendHeaders": true,
         "headerParameters": {
           "parameters": [
-            {
-              "name": "Authorization",
-              "value": "={{ 'Basic ' + Buffer.from($env.GA_WP_USERNAME + ':' + $env.GA_WP_APPLICATION_PASSWORD).toString('base64') }}"
-            },
             {
               "name": "Content-Type",
               "value": "application/json"
@@ -104,7 +100,8 @@
         "body": "={{ JSON.stringify({title:$json.title,excerpt:$json.excerpt,content:$json.content,status:'draft'}) }}",
         "options": {
           "timeout": 30000
-        }
+        },
+        "genericAuthType": "httpBasicAuth"
       },
       "id": "ga-wp-create-draft",
       "name": "Criar rascunho no WordPress",
