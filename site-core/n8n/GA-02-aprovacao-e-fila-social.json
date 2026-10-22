@@ -21,7 +21,7 @@
     },
     {
       "parameters": {
-        "jsCode": "const d = $json.body ?? $json;\nif (d.approved !== true) throw new Error('Bloqueado: aprovação explícita obrigatória.');\nconst content_id = String(d.content_id ?? '').trim();\nconst idempotency_key = String(d.idempotency_key ?? '').trim();\nconst caption = String(d.caption ?? '').trim();\nif (!content_id || !idempotency_key || !caption) throw new Error('content_id, idempotency_key e caption são obrigatórios.');\nconst allowed = new Set(['linkedin','youtube','instagram','tiktok','facebook','x']);\nconst channels = [...new Set((Array.isArray(d.channels)?d.channels:[]).map(v=>String(v).toLowerCase()).filter(v=>allowed.has(v)))];\nif (!channels.length) throw new Error('Nenhum canal válido foi informado.');\nreturn [{json:{content_id,idempotency_key,caption,channels,approved:true,status:'queued_not_published',publish_confirmed:false,received_at:new Date().toISOString(),instruction:'Conectar um adaptador autenticado após homologar a conta e as permissões.'}}];"
+        "jsCode": "const d = $json.body ?? $json;\nif (d.approved !== true) throw new Error('Bloqueado: aprovação explícita obrigatória.');\nconst content_id = String(d.content_id ?? '').trim();\nconst idempotency_key = String(d.idempotency_key ?? '').trim();\nconst caption = String(d.caption ?? '').trim();\nif (!content_id || !idempotency_key || !caption) throw new Error('content_id, idempotency_key e caption são obrigatórios.');\n// Só liberar redes confirmadas na conexão Metricool atual. Instagram fica bloqueado até confirmar perfil institucional.\nconst allowed = new Set(['youtube','tiktok','facebook']);\nconst requested = Array.isArray(d.channels) ? [...new Set(d.channels.map(v=>String(v).toLowerCase()))] : [];\nconst channels = requested.filter(v=>allowed.has(v));\nconst blocked_channels = requested.filter(v=>!allowed.has(v));\nif (!channels.length) throw new Error('Nenhum canal aprovado/conectado. Permitidos nesta fase: Facebook, TikTok e YouTube. Instagram permanece bloqueado até confirmar o perfil institucional.');\nreturn [{json:{content_id,idempotency_key,caption,channels,blocked_channels,approved:true,status:'queued_not_published',publish_confirmed:false,received_at:new Date().toISOString(),instruction:'Esta é somente uma fila validada; ainda não publica. Conecte adaptador autenticado e confirme a publicação na plataforma.'}}];"
       },
       "id": "ga-social-validate",
       "name": "Validar aprovação e deduplicação",
@@ -35,7 +35,7 @@
     {
       "parameters": {
         "respondWith": "json",
-        "responseBody": "={{ { ok:true, status:$json.status, content_id:$json.content_id, channels:$json.channels, publish_confirmed:false } }}",
+        "responseBody": "={{ { ok:true, status:$json.status, content_id:$json.content_id, channels:$json.channels, blocked_channels:$json.blocked_channels, publish_confirmed:false } }}",
         "options": {
           "responseCode": 202
         }
