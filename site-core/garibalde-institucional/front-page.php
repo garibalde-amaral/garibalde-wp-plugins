@@ -1,23 +1,31 @@
 <?php
 get_header();
 $ga_home_slides = array(
- array('id'=>'HOME-01','title'=>'Advocacia com visão estratégica.','description'=>'Experiência jurídica, método e clareza para decisões importantes.','image'=>get_template_directory_uri().'/assets/images/home/HOME-01.webp'),
- array('id'=>'HOME-02','title'=>'Conhecimento jurídico que aproxima.','description'=>'Informação responsável para compreender cenários, direitos e caminhos possíveis.','image'=>get_template_directory_uri().'/assets/images/home/HOME-02.webp'),
- array('id'=>'HOME-03','title'=>'Atendimento digital pelo canal certo.','description'=>'Inicie seu contato pela Central Digital do Cliente, de forma organizada e segura.','image'=>get_template_directory_uri().'/assets/images/home/HOME-03.webp'),
+ array('id'=>'HOME-01','file'=>'HOME-01.webp','title'=>'Uma presença institucional com visão de futuro.','description'=>'Estratégia, clareza e conhecimento jurídico organizados em uma experiência digital contemporânea.'),
+ array('id'=>'HOME-02','file'=>'HOME-02.webp','title'=>'Conhecimento jurídico, atenção ao detalhe.','description'=>'Conteúdo informativo apresentado com critério, responsabilidade e linguagem clara.'),
+ array('id'=>'HOME-03','file'=>'HOME-03.webp','title'=>'Estrutura para decisões importantes.','description'=>'Conheça as áreas de atuação e encontre o canal adequado para sua necessidade.'),
+ array('id'=>'HOME-04','file'=>'HOME-04.webp','title'=>'Atendimento digital pelo caminho certo.','description'=>'Para atendimento geral, comece pela Central Digital do Cliente.'),
 );
-$ga_home_json = wp_json_encode($ga_home_slides, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-$ga_areas = function_exists('ga_core_areas_catalog') ? ga_core_areas_catalog() : array();
-?>
-<section class="ga-hero ga-hero--carousel" id="ga-hero" data-ga-carousel data-ga-home data-ga-slides="<?php echo esc_attr($ga_home_json); ?>" data-ga-interval="7000">
+$ga_home_slides = array_values(array_filter(array_map(function($slide) {
+ $url = function_exists('ga_core_home_asset_url') ? ga_core_home_asset_url($slide['file']) : '';
+ if ( ! $url ) { return null; }
+ $slide['image'] = $url;
+ unset($slide['file']);
+ return $slide;
+}, $ga_home_slides)));
+$ga_all_slides_json = wp_json_encode($ga_home_slides, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+$ga_first_slide = ! empty($ga_home_slides) ? $ga_home_slides[0] : array('title'=>'Garibalde Amaral Advogados Associados','description'=>'Informação jurídica responsável, organização e atendimento digital.','image'=>'');
+
+<section class="ga-hero ga-hero--carousel" id="ga-hero" data-ga-carousel data-ga-home data-ga-slides="<?php echo esc_attr($ga_all_slides_json); ?>" data-ga-interval="7000">
  <div class="ga-hero-media" aria-hidden="true">
-  <?php foreach($ga_home_slides as $i=>$slide): $file=get_template_directory().'/assets/images/home/'.basename($slide['image']); $has_image=is_file($file); ?>
-   <?php if($has_image): ?><img class="ga-hero-media-slide<?php echo $i===0?' is-active':''; ?>" src="<?php echo esc_url($slide['image']); ?>" alt="" loading="<?php echo $i===0?'eager':'lazy'; ?>" decoding="async" data-ga-slide="<?php echo (int)$i; ?>"><?php endif; ?>
+  <?php foreach($ga_home_slides as $i=>$slide): ?>
+   <img class="ga-hero-media-slide<?php echo $i===0?' is-active':''; ?>" src="<?php echo esc_url($slide['image']); ?>" alt="" loading="<?php echo $i===0?'eager':'lazy'; ?>" decoding="async" data-ga-slide="<?php echo (int)$i; ?>">
   <?php endforeach; ?>
  </div>
  <div class="ga-container ga-hero-content">
   <span class="ga-eyebrow">Garibalde Amaral Advogados Associados</span>
-  <h1 data-ga-title><?php echo esc_html($ga_home_slides[0]['title']); ?></h1>
-  <p data-ga-description><?php echo esc_html($ga_home_slides[0]['description']); ?></p>
+  <h1 data-ga-title><?php echo esc_html($ga_first_slide['title']); ?></h1>
+  <p data-ga-description><?php echo esc_html($ga_first_slide['description']); ?></p>
   <div class="ga-hero-actions">
    <a class="ga-button" href="<?php echo esc_url(home_url('/central-digital-do-cliente/')); ?>">Acessar Central Digital</a>
    <a class="ga-button ga-button--glass" href="<?php echo esc_url(home_url('/area-de-atuacao/')); ?>">Explorar áreas de atuação</a>
@@ -26,7 +34,7 @@ $ga_areas = function_exists('ga_core_areas_catalog') ? ga_core_areas_catalog() :
  <div class="ga-hero-controls" aria-label="Controles do destaque principal">
   <button type="button" data-ga-prev aria-label="Slide anterior">‹</button>
   <button type="button" data-ga-pause aria-pressed="false" aria-label="Pausar transição">Ⅱ</button>
-  <span data-ga-count aria-live="polite">1 / <?php echo count($ga_home_slides); ?></span>
+  <span data-ga-count aria-live="polite">1 / <?php echo max(1,count($ga_home_slides)); ?></span>
   <button type="button" data-ga-next aria-label="Próximo slide">›</button>
  </div>
 </section>
