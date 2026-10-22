@@ -1,0 +1,959 @@
+{
+  "catalog_version": "1.0.0",
+  "source_document": "Livro Visual Mestre Garibalde Amaral v2 — escolhas/briefs por ID",
+  "image_rules": {
+    "style": "fotografia editorial realista, luxo sóbrio, café profundo, grafite, marfim e ouro fosco em acentos, alto contraste fotográfico natural",
+    "no_text": true,
+    "no_logos": true,
+    "no_watermarks": true,
+    "no_identifiable_clients": true,
+    "no_fake_official_buildings": true,
+    "no_fake_maps": true,
+    "no_synthetic_staff_portraits": true,
+    "main_link_count": 36,
+    "practice_area_active_count": 30,
+    "total_active_slots": 66
+  },
+  "main_pages": [
+    {
+      "slug": "home",
+      "title": "Home",
+      "ids": [
+        "HOME-01",
+        "HOME-02",
+        "HOME-03",
+        "HOME-04"
+      ]
+    },
+    {
+      "slug": "quem-somos",
+      "title": "Quem Somos",
+      "ids": [
+        "QS-01",
+        "QS-02",
+        "QS-03",
+        "QS-04"
+      ]
+    },
+    {
+      "slug": "area-de-atuacao",
+      "title": "Área de Atuação",
+      "ids": [
+        "AA-01",
+        "AA-02",
+        "AA-03",
+        "AA-04"
+      ]
+    },
+    {
+      "slug": "equipe",
+      "title": "Equipe",
+      "ids": [
+        "EQ-01",
+        "EQ-02",
+        "EQ-03",
+        "EQ-04"
+      ]
+    },
+    {
+      "slug": "artigos",
+      "title": "Artigos e Notícias",
+      "ids": [
+        "ART-01",
+        "ART-02",
+        "ART-03",
+        "ART-04"
+      ]
+    },
+    {
+      "slug": "clientes",
+      "title": "Clientes",
+      "ids": [
+        "CLI-01",
+        "CLI-02",
+        "CLI-03",
+        "CLI-04"
+      ]
+    },
+    {
+      "slug": "links-uteis",
+      "title": "Links Úteis",
+      "ids": [
+        "LU-01",
+        "LU-02",
+        "LU-03",
+        "LU-04"
+      ]
+    },
+    {
+      "slug": "contato",
+      "title": "Contato",
+      "ids": [
+        "CONT-01",
+        "CONT-02",
+        "CONT-03",
+        "CONT-04"
+      ]
+    },
+    {
+      "slug": "localizacao",
+      "title": "Localização",
+      "ids": [
+        "LOC-01",
+        "LOC-02",
+        "LOC-03",
+        "LOC-04"
+      ]
+    }
+  ],
+  "practice_areas": [
+    {
+      "slug": "administrativo-contratos-publicos",
+      "title": "Administrativo e Contratos Públicos",
+      "ids": [
+        "ADMINISTRATIVO_E_CONTRATOS_PUBLICOS-01",
+        "ADMINISTRATIVO_E_CONTRATOS_PUBLICOS-03"
+      ]
+    },
+    {
+      "slug": "arbitragem-mediacao",
+      "title": "Arbitragem e Mediação",
+      "ids": [
+        "ARBITRAGEM_E_MEDIACAO-01",
+        "ARBITRAGEM_E_MEDIACAO-02"
+      ]
+    },
+    {
+      "slug": "contencioso-civil-comercial",
+      "title": "Contencioso Civil e Comercial",
+      "ids": [
+        "CONTENCIOSO_CIVIL_E_COMERCIAL-01",
+        "CONTENCIOSO_CIVIL_E_COMERCIAL-02"
+      ]
+    },
+    {
+      "slug": "direito-ambiental",
+      "title": "Direito Ambiental",
+      "ids": [
+        "DIREITO_AMBIENTAL-01",
+        "DIREITO_AMBIENTAL-02"
+      ]
+    },
+    {
+      "slug": "direito-bancario-financeiro",
+      "title": "Direito Bancário e Financeiro",
+      "ids": [
+        "DIREITO_BANCARIO_E_FINANCEIRO-01",
+        "DIREITO_BANCARIO_E_FINANCEIRO-03"
+      ]
+    },
+    {
+      "slug": "direito-familia-sucessoes",
+      "title": "Direito de Família e Sucessões",
+      "ids": [
+        "DIREITO_DE_FAMILIA_E_SUCESSOES-01",
+        "DIREITO_DE_FAMILIA_E_SUCESSOES-02"
+      ]
+    },
+    {
+      "slug": "direito-imobiliario",
+      "title": "Direito Imobiliário",
+      "ids": [
+        "DIREITO_IMOBILIARIO-01",
+        "DIREITO_IMOBILIARIO-02"
+      ]
+    },
+    {
+      "slug": "direito-penal",
+      "title": "Direito Penal",
+      "ids": [
+        "DIREITO_PENAL-01",
+        "DIREITO_PENAL-02"
+      ]
+    },
+    {
+      "slug": "direito-trabalhista",
+      "title": "Direito Trabalhista",
+      "ids": [
+        "DIREITO_TRABALHISTA-01",
+        "DIREITO_TRABALHISTA-02"
+      ]
+    },
+    {
+      "slug": "direito-eleitoral",
+      "title": "Direito Eleitoral",
+      "ids": [
+        "DIREITO_ELEITORAL-01",
+        "DIREITO_ELEITORAL-02"
+      ]
+    },
+    {
+      "slug": "empresarial-recuperacao-empresas",
+      "title": "Empresarial e Recuperação de Empresas",
+      "ids": [
+        "EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-01",
+        "EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-04"
+      ]
+    },
+    {
+      "slug": "justica-desportiva",
+      "title": "Justiça Desportiva",
+      "ids": [
+        "JUSTICA_DESPORTIVA-01",
+        "JUSTICA_DESPORTIVA-05"
+      ]
+    },
+    {
+      "slug": "direito-previdenciario",
+      "title": "Direito Previdenciário",
+      "ids": [
+        "DIREITO_PREVIDENCIARIO-04",
+        "DIREITO_PREVIDENCIARIO-01"
+      ]
+    },
+    {
+      "slug": "relacao-consumo",
+      "title": "Relação de Consumo",
+      "ids": [
+        "RELACAO_DE_CONSUMO-01",
+        "RELACAO_DE_CONSUMO-05"
+      ]
+    },
+    {
+      "slug": "direito-tributario",
+      "title": "Direito Tributário",
+      "ids": [
+        "DIREITO_TRIBUTARIO-01",
+        "DIREITO_TRIBUTARIO-02"
+      ]
+    }
+  ],
+  "photos": [
+    {
+      "id": "HOME-01",
+      "scope": "main",
+      "page_slug": "home",
+      "page_title": "Home",
+      "rank": 1,
+      "filename": "assets/images/site/HOME-01.jpg",
+      "scene": "Arquitetura institucional ao entardecer, skyline discreto e amplo espaço negativo para título.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "HOME-02",
+      "scope": "main",
+      "page_slug": "home",
+      "page_title": "Home",
+      "rank": 2,
+      "filename": "assets/images/site/HOME-02.jpg",
+      "scene": "Mesa editorial com caneta, papel neutro e luz lateral quente, sem texto legível.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "HOME-03",
+      "scope": "main",
+      "page_slug": "home",
+      "page_title": "Home",
+      "rank": 3,
+      "filename": "assets/images/site/HOME-03.jpg",
+      "scene": "Fachada corporativa contemporânea, linhas verticais e reflexos controlados em vidro.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "HOME-04",
+      "scope": "main",
+      "page_slug": "home",
+      "page_title": "Home",
+      "rank": 4,
+      "filename": "assets/images/site/HOME-04.jpg",
+      "scene": "Interior institucional com pedra natural, madeira escura e luz indireta, sem marcação fictícia.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "QS-01",
+      "scope": "main",
+      "page_slug": "quem-somos",
+      "page_title": "Quem Somos",
+      "rank": 1,
+      "filename": "assets/images/site/QS-01.jpg",
+      "scene": "Biblioteca jurídica contemporânea, estantes profundas e arquitetura sóbria.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "QS-02",
+      "scope": "main",
+      "page_slug": "quem-somos",
+      "page_title": "Quem Somos",
+      "rank": 2,
+      "filename": "assets/images/site/QS-02.jpg",
+      "scene": "Mesa de reunião preparada, cadernos e documentos neutros sem dados legíveis.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "QS-03",
+      "scope": "main",
+      "page_slug": "quem-somos",
+      "page_title": "Quem Somos",
+      "rank": 3,
+      "filename": "assets/images/site/QS-03.jpg",
+      "scene": "Escadaria ou linhas arquitetônicas convergentes, materiais escuros e luz de recorte.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "QS-04",
+      "scope": "main",
+      "page_slug": "quem-somos",
+      "page_title": "Quem Somos",
+      "rank": 4,
+      "filename": "assets/images/site/QS-04.jpg",
+      "scene": "Reunião vista de ângulo lateral, profissionais sem rostos identificáveis.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "AA-01",
+      "scope": "main",
+      "page_slug": "area-de-atuacao",
+      "page_title": "Área de Atuação",
+      "rank": 1,
+      "filename": "assets/images/site/AA-01.jpg",
+      "scene": "Arquitetura cívica contemporânea com colunas e perspectiva ampla, sem simular órgão real.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "AA-02",
+      "scope": "main",
+      "page_slug": "area-de-atuacao",
+      "page_title": "Área de Atuação",
+      "rank": 2,
+      "filename": "assets/images/site/AA-02.jpg",
+      "scene": "Balança em metal escovado e biblioteca desfocada, composição discreta.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "AA-03",
+      "scope": "main",
+      "page_slug": "area-de-atuacao",
+      "page_title": "Área de Atuação",
+      "rank": 3,
+      "filename": "assets/images/site/AA-03.jpg",
+      "scene": "Portas institucionais de pedra e vidro, com eixo visual limpo.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "AA-04",
+      "scope": "main",
+      "page_slug": "area-de-atuacao",
+      "page_title": "Área de Atuação",
+      "rank": 4,
+      "filename": "assets/images/site/AA-04.jpg",
+      "scene": "Interface abstrata de tecnologia jurídica em tons frios moderados, sem texto ou dados legíveis.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "EQ-01",
+      "scope": "main",
+      "page_slug": "equipe",
+      "page_title": "Equipe",
+      "rank": 1,
+      "filename": "assets/images/site/EQ-01.jpg",
+      "scene": "Retrato profissional real fornecido e autorizado; não gerar rosto sintético. Este ativo deve vir do retrato original aprovado.",
+      "source_required": true,
+      "publish_rule": "Use apenas arquivo real/autorizado ou ferramenta oficial; não gerar imagem fictícia."
+    },
+    {
+      "id": "EQ-02",
+      "scope": "main",
+      "page_slug": "equipe",
+      "page_title": "Equipe",
+      "rank": 2,
+      "filename": "assets/images/site/EQ-02.jpg",
+      "scene": "Sala de reunião contemporânea pronta para uma conversa profissional.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "EQ-03",
+      "scope": "main",
+      "page_slug": "equipe",
+      "page_title": "Equipe",
+      "rank": 3,
+      "filename": "assets/images/site/EQ-03.jpg",
+      "scene": "Close-up de mãos revisando pasta documental, sem dados pessoais ou identificação.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "EQ-04",
+      "scope": "main",
+      "page_slug": "equipe",
+      "page_title": "Equipe",
+      "rank": 4,
+      "filename": "assets/images/site/EQ-04.jpg",
+      "scene": "Espaço executivo com cadeira, estante e luz natural controlada.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "ART-01",
+      "scope": "main",
+      "page_slug": "artigos",
+      "page_title": "Artigos e Notícias",
+      "rank": 1,
+      "filename": "assets/images/site/ART-01.jpg",
+      "scene": "Mesa editorial com livros, papel e caneta-tinteiro sob luz lateral.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "ART-02",
+      "scope": "main",
+      "page_slug": "artigos",
+      "page_title": "Artigos e Notícias",
+      "rank": 2,
+      "filename": "assets/images/site/ART-02.jpg",
+      "scene": "Estante de obras jurídicas, lombadas neutras e sem títulos legíveis inventados.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "ART-03",
+      "scope": "main",
+      "page_slug": "artigos",
+      "page_title": "Artigos e Notícias",
+      "rank": 3,
+      "filename": "assets/images/site/ART-03.jpg",
+      "scene": "Notebook com tela abstrata desfocada e documento neutro.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "ART-04",
+      "scope": "main",
+      "page_slug": "artigos",
+      "page_title": "Artigos e Notícias",
+      "rank": 4,
+      "filename": "assets/images/site/ART-04.jpg",
+      "scene": "Close-up de anotações e marcações editoriais não legíveis.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CLI-01",
+      "scope": "main",
+      "page_slug": "clientes",
+      "page_title": "Clientes",
+      "rank": 1,
+      "filename": "assets/images/site/CLI-01.jpg",
+      "scene": "Aperto de mãos em enquadramento editorial, sem insinuar cliente real ou promessa de resultado.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CLI-02",
+      "scope": "main",
+      "page_slug": "clientes",
+      "page_title": "Clientes",
+      "rank": 2,
+      "filename": "assets/images/site/CLI-02.jpg",
+      "scene": "Reunião de negócios em sala neutra, participantes não identificáveis.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CLI-03",
+      "scope": "main",
+      "page_slug": "clientes",
+      "page_title": "Clientes",
+      "rank": 3,
+      "filename": "assets/images/site/CLI-03.jpg",
+      "scene": "Ambiente reservado de consulta individual, com foco no espaço e na discrição.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CLI-04",
+      "scope": "main",
+      "page_slug": "clientes",
+      "page_title": "Clientes",
+      "rank": 4,
+      "filename": "assets/images/site/CLI-04.jpg",
+      "scene": "Mesa com dois lugares e documentação genérica.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "LU-01",
+      "scope": "main",
+      "page_slug": "links-uteis",
+      "page_title": "Links Úteis",
+      "rank": 1,
+      "filename": "assets/images/site/LU-01.jpg",
+      "scene": "Pastas documentais organizadas e instrumentos de escrita sobre mesa escura.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "LU-02",
+      "scope": "main",
+      "page_slug": "links-uteis",
+      "page_title": "Links Úteis",
+      "rank": 2,
+      "filename": "assets/images/site/LU-02.jpg",
+      "scene": "Estante de referências jurídicas em ambiente de estudo contemporâneo.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "LU-03",
+      "scope": "main",
+      "page_slug": "links-uteis",
+      "page_title": "Links Úteis",
+      "rank": 3,
+      "filename": "assets/images/site/LU-03.jpg",
+      "scene": "Dispositivo digital ao lado de caderno, tela totalmente abstrata e sem dados reais.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "LU-04",
+      "scope": "main",
+      "page_slug": "links-uteis",
+      "page_title": "Links Úteis",
+      "rank": 4,
+      "filename": "assets/images/site/LU-04.jpg",
+      "scene": "Pasta fechada e estação de trabalho organizada, sugerindo confidencialidade.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CONT-01",
+      "scope": "main",
+      "page_slug": "contato",
+      "page_title": "Contato",
+      "rank": 1,
+      "filename": "assets/images/site/CONT-01.jpg",
+      "scene": "Recepção institucional de alto padrão, sinalização neutra sem textos fictícios.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CONT-02",
+      "scope": "main",
+      "page_slug": "contato",
+      "page_title": "Contato",
+      "rank": 2,
+      "filename": "assets/images/site/CONT-02.jpg",
+      "scene": "Sala de reunião com cadeiras, janela e iluminação natural acolhedora.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CONT-03",
+      "scope": "main",
+      "page_slug": "contato",
+      "page_title": "Contato",
+      "rank": 3,
+      "filename": "assets/images/site/CONT-03.jpg",
+      "scene": "Entrada arquitetônica de edifício e contexto urbano genérico, sem afirmar que é a fachada real do escritório.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "CONT-04",
+      "scope": "main",
+      "page_slug": "contato",
+      "page_title": "Contato",
+      "rank": 4,
+      "filename": "assets/images/site/CONT-04.jpg",
+      "scene": "Mesa com telefone e caderno, sem números na tela, sem dados e sem e-mail visível.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "LOC-01",
+      "scope": "main",
+      "page_slug": "localizacao",
+      "page_title": "Localização",
+      "rank": 1,
+      "filename": "assets/images/site/LOC-01.jpg",
+      "scene": "Fotografia real e autorizada da fachada/entorno do escritório. Não inventar fachada.",
+      "source_required": true,
+      "publish_rule": "Use apenas arquivo real/autorizado ou ferramenta oficial; não gerar imagem fictícia."
+    },
+    {
+      "id": "LOC-02",
+      "scope": "main",
+      "page_slug": "localizacao",
+      "page_title": "Localização",
+      "rank": 2,
+      "filename": "assets/images/site/LOC-02.jpg",
+      "scene": "Vista urbana real de Anápolis, em horário dourado, sem inserir marcos não verificados.",
+      "source_required": false,
+      "publish_rule": "Gerar foto editorial sem texto, marcas, logotipos, números ou dados legíveis."
+    },
+    {
+      "id": "LOC-03",
+      "scope": "main",
+      "page_slug": "localizacao",
+      "page_title": "Localização",
+      "rank": 3,
+      "filename": "assets/images/site/LOC-03.jpg",
+      "scene": "Mapa oficial incorporado por ferramenta cartográfica ou captura autorizada; não gerar mapa fictício.",
+      "source_required": true,
+      "publish_rule": "Use apenas arquivo real/autorizado ou ferramenta oficial; não gerar imagem fictícia."
+    },
+    {
+      "id": "LOC-04",
+      "scope": "main",
+      "page_slug": "localizacao",
+      "page_title": "Localização",
+      "rank": 4,
+      "filename": "assets/images/site/LOC-04.jpg",
+      "scene": "Acesso urbano real ao bairro, fotografado no local, sem placas legíveis indevidas.",
+      "source_required": true,
+      "publish_rule": "Use apenas arquivo real/autorizado ou ferramenta oficial; não gerar imagem fictícia."
+    },
+    {
+      "id": "ADMINISTRATIVO_E_CONTRATOS_PUBLICOS-01",
+      "scope": "practice-area",
+      "area_slug": "administrativo-contratos-publicos",
+      "area_title": "Administrativo e Contratos Públicos",
+      "rank": 1,
+      "filename": "assets/images/areas/ADMINISTRATIVO_E_CONTRATOS_PUBLICOS-01.jpg",
+      "scene": "Fachada cívica contemporânea com colunas e linhas simétricas, sem brasões ou identificação de órgão real.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "ADMINISTRATIVO_E_CONTRATOS_PUBLICOS-03",
+      "scope": "practice-area",
+      "area_slug": "administrativo-contratos-publicos",
+      "area_title": "Administrativo e Contratos Públicos",
+      "rank": 2,
+      "filename": "assets/images/areas/ADMINISTRATIVO_E_CONTRATOS_PUBLICOS-03.jpg",
+      "scene": "Sala de reunião formal com cadeiras alinhadas e iluminação neutra.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "ARBITRAGEM_E_MEDIACAO-01",
+      "scope": "practice-area",
+      "area_slug": "arbitragem-mediacao",
+      "area_title": "Arbitragem e Mediação",
+      "rank": 1,
+      "filename": "assets/images/areas/ARBITRAGEM_E_MEDIACAO-01.jpg",
+      "scene": "Mesa circular de diálogo preparada em sala contemporânea e acolhedora.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "ARBITRAGEM_E_MEDIACAO-02",
+      "scope": "practice-area",
+      "area_slug": "arbitragem-mediacao",
+      "area_title": "Arbitragem e Mediação",
+      "rank": 2,
+      "filename": "assets/images/areas/ARBITRAGEM_E_MEDIACAO-02.jpg",
+      "scene": "Duas pessoas representadas de costas em conversa profissional, sem gestos dramáticos nem rostos identificáveis.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "CONTENCIOSO_CIVIL_E_COMERCIAL-01",
+      "scope": "practice-area",
+      "area_slug": "contencioso-civil-comercial",
+      "area_title": "Contencioso Civil e Comercial",
+      "rank": 1,
+      "filename": "assets/images/areas/CONTENCIOSO_CIVIL_E_COMERCIAL-01.jpg",
+      "scene": "Arquitetura institucional com colunas modernas e profundidade visual.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "CONTENCIOSO_CIVIL_E_COMERCIAL-02",
+      "scope": "practice-area",
+      "area_slug": "contencioso-civil-comercial",
+      "area_title": "Contencioso Civil e Comercial",
+      "rank": 2,
+      "filename": "assets/images/areas/CONTENCIOSO_CIVIL_E_COMERCIAL-02.jpg",
+      "scene": "Mesa jurídica com caneta-tinteiro, documentos neutros e livros sem títulos legíveis.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_AMBIENTAL-01",
+      "scope": "practice-area",
+      "area_slug": "direito-ambiental",
+      "area_title": "Direito Ambiental",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_AMBIENTAL-01.jpg",
+      "scene": "Paisagem de floresta nativa em luz da manhã, composição limpa e realista.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_AMBIENTAL-02",
+      "scope": "practice-area",
+      "area_slug": "direito-ambiental",
+      "area_title": "Direito Ambiental",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_AMBIENTAL-02.jpg",
+      "scene": "Rio ou reservatório cercado por vegetação, sem elementos de catástrofe.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_BANCARIO_E_FINANCEIRO-01",
+      "scope": "practice-area",
+      "area_slug": "direito-bancario-financeiro",
+      "area_title": "Direito Bancário e Financeiro",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_BANCARIO_E_FINANCEIRO-01.jpg",
+      "scene": "Torres financeiras de vidro sob luz de início de manhã.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_BANCARIO_E_FINANCEIRO-03",
+      "scope": "practice-area",
+      "area_slug": "direito-bancario-financeiro",
+      "area_title": "Direito Bancário e Financeiro",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_BANCARIO_E_FINANCEIRO-03.jpg",
+      "scene": "Close-up de gráfico abstrato impresso, sem números legíveis ou valores inventados.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_DE_FAMILIA_E_SUCESSOES-01",
+      "scope": "practice-area",
+      "area_slug": "direito-familia-sucessoes",
+      "area_title": "Direito de Família e Sucessões",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_DE_FAMILIA_E_SUCESSOES-01.jpg",
+      "scene": "Silhuetas familiares caminhando ao entardecer, sem identificação individual.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_DE_FAMILIA_E_SUCESSOES-02",
+      "scope": "practice-area",
+      "area_slug": "direito-familia-sucessoes",
+      "area_title": "Direito de Família e Sucessões",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_DE_FAMILIA_E_SUCESSOES-02.jpg",
+      "scene": "Interior residencial sereno, com luz natural e materiais neutros.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_IMOBILIARIO-01",
+      "scope": "practice-area",
+      "area_slug": "direito-imobiliario",
+      "area_title": "Direito Imobiliário",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_IMOBILIARIO-01.jpg",
+      "scene": "Fachada de imóvel contemporâneo com linhas arquitetônicas marcantes.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_IMOBILIARIO-02",
+      "scope": "practice-area",
+      "area_slug": "direito-imobiliario",
+      "area_title": "Direito Imobiliário",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_IMOBILIARIO-02.jpg",
+      "scene": "Edifício residencial moderno sob luz natural.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_PENAL-01",
+      "scope": "practice-area",
+      "area_slug": "direito-penal",
+      "area_title": "Direito Penal",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_PENAL-01.jpg",
+      "scene": "Corredor institucional vazio com luz recortada e perspectiva longa, sem atmosfera sensacionalista.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_PENAL-02",
+      "scope": "practice-area",
+      "area_slug": "direito-penal",
+      "area_title": "Direito Penal",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_PENAL-02.jpg",
+      "scene": "Fachada de edifício judiciário genérico em horário de luz baixa, sem identificar órgão real.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_TRABALHISTA-01",
+      "scope": "practice-area",
+      "area_slug": "direito-trabalhista",
+      "area_title": "Direito Trabalhista",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_TRABALHISTA-01.jpg",
+      "scene": "Ambiente profissional contemporâneo com trabalhadores em contexto cotidiano, sem rostos identificáveis.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_TRABALHISTA-02",
+      "scope": "practice-area",
+      "area_slug": "direito-trabalhista",
+      "area_title": "Direito Trabalhista",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_TRABALHISTA-02.jpg",
+      "scene": "Reunião entre gestor e profissional em sala neutra, sem tensão dramatizada.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_ELEITORAL-01",
+      "scope": "practice-area",
+      "area_slug": "direito-eleitoral",
+      "area_title": "Direito Eleitoral",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_ELEITORAL-01.jpg",
+      "scene": "Urna ou estrutura de votação genérica, sem marca, partido ou candidato.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_ELEITORAL-02",
+      "scope": "practice-area",
+      "area_slug": "direito-eleitoral",
+      "area_title": "Direito Eleitoral",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_ELEITORAL-02.jpg",
+      "scene": "Edifício cívico com acesso público em composição neutra, sem identificar órgão real.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-01",
+      "scope": "practice-area",
+      "area_slug": "empresarial-recuperacao-empresas",
+      "area_title": "Empresarial e Recuperação de Empresas",
+      "rank": 1,
+      "filename": "assets/images/areas/EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-01.jpg",
+      "scene": "Interior industrial organizado com linhas de produção em perspectiva.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-04",
+      "scope": "practice-area",
+      "area_slug": "empresarial-recuperacao-empresas",
+      "area_title": "Empresarial e Recuperação de Empresas",
+      "rank": 2,
+      "filename": "assets/images/areas/EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-04.jpg",
+      "scene": "Reunião executiva em torno de mesa com gráficos desfocados e sem números legíveis.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "JUSTICA_DESPORTIVA-01",
+      "scope": "practice-area",
+      "area_slug": "justica-desportiva",
+      "area_title": "Justiça Desportiva",
+      "rank": 1,
+      "filename": "assets/images/areas/JUSTICA_DESPORTIVA-01.jpg",
+      "scene": "Estádio esportivo vazio com arquitetura de alta qualidade e sem marcas de equipes.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "JUSTICA_DESPORTIVA-05",
+      "scope": "practice-area",
+      "area_slug": "justica-desportiva",
+      "area_title": "Justiça Desportiva",
+      "rank": 2,
+      "filename": "assets/images/areas/JUSTICA_DESPORTIVA-05.jpg",
+      "scene": "Reunião profissional de gestão esportiva, sem símbolos de organizações reais.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_PREVIDENCIARIO-04",
+      "scope": "practice-area",
+      "area_slug": "direito-previdenciario",
+      "area_title": "Direito Previdenciário",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_PREVIDENCIARIO-04.jpg",
+      "scene": "Conversa reservada entre profissional e pessoa adulta mais velha, respeitosa e não identificável.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_PREVIDENCIARIO-01",
+      "scope": "practice-area",
+      "area_slug": "direito-previdenciario",
+      "area_title": "Direito Previdenciário",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_PREVIDENCIARIO-01.jpg",
+      "scene": "Pessoa idosa adulta revisando documentos em ambiente doméstico iluminado, sem identificação.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "RELACAO_DE_CONSUMO-01",
+      "scope": "practice-area",
+      "area_slug": "relacao-consumo",
+      "area_title": "Relação de Consumo",
+      "rank": 1,
+      "filename": "assets/images/areas/RELACAO_DE_CONSUMO-01.jpg",
+      "scene": "Atendimento em balcão de loja contemporânea sem marca.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "RELACAO_DE_CONSUMO-05",
+      "scope": "practice-area",
+      "area_slug": "relacao-consumo",
+      "area_title": "Relação de Consumo",
+      "rank": 2,
+      "filename": "assets/images/areas/RELACAO_DE_CONSUMO-05.jpg",
+      "scene": "Interação de troca de mercadoria em ambiente de varejo contemporâneo, sem marcas ou dados identificáveis.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_TRIBUTARIO-01",
+      "scope": "practice-area",
+      "area_slug": "direito-tributario",
+      "area_title": "Direito Tributário",
+      "rank": 1,
+      "filename": "assets/images/areas/DIREITO_TRIBUTARIO-01.jpg",
+      "scene": "Arquitetura corporativa e torres de escritórios em luz fria suave.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    },
+    {
+      "id": "DIREITO_TRIBUTARIO-02",
+      "scope": "practice-area",
+      "area_slug": "direito-tributario",
+      "area_title": "Direito Tributário",
+      "rank": 2,
+      "filename": "assets/images/areas/DIREITO_TRIBUTARIO-02.jpg",
+      "scene": "Calculadora financeira e folhas de números desfocados, sem valores legíveis.",
+      "source_required": false,
+      "publish_rule": "Foto editorial individual, sem texto, logotipos, marcas, valores ou dados legíveis."
+    }
+  ]
+}
