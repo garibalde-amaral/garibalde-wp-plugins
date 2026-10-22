@@ -1,0 +1,1 @@
+<?php get_header(); ?><section class="ga-section"><div class="ga-container"><?php while(have_posts()):the_post();?><article <?php post_class(); ?>><h1 class="ga-heading"><?php the_title(); ?></h1><div class="ga-content"><?php the_content(); ?></div></article><?php endwhile;?></div></section><?php get_footer(); ?>
