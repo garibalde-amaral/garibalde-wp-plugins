@@ -108,8 +108,26 @@ def save_webp(base_url: str, output: dict[str, Any], destination: Path, min_widt
     try:
         with Image.open(io.BytesIO(raw)) as source:
             image = ImageOps.exif_transpose(source).convert("RGB")
-            if image.width < min_width or image.height < 600:
-                raise RuntimeError(f"Generated image too small ({image.width}x{image.height}); not accepted.")
+            if image.width < 1024 or image.height < 576:
+                raise RuntimeError(f"Generated image too small ({image.width}x{image.height}); expected at least 1024x576.")
+            # Standardize all photo-master files to a wide 16:9 canvas without stretching.
+            target_ratio = 16 / 9
+            current_ratio = image.width / image.height
+            if current_ratio > target_ratio:
+                crop_width = int(image.height * target_ratio)
+                left = max((image.width - crop_width) // 2, 0)
+                image = image.crop((left, 0, left + crop_width, image.height))
+            elif current_ratio < target_ratio:
+                crop_height = int(image.width / target_ratio)
+                top = max((image.height - crop_height) // 2, 0)
+                image = image.crop((0, top, image.width, top + crop_height))
+            # SDXL runs at 1024-wide native output for broader local hardware compatibility;
+            # upscale once for web delivery, preserving the photographic scene and aspect ratio.
+            if image.width < min_width:
+                target_height = int(image.width * 9 / 16)
+                target_width = min_width
+                target_height = max(600, int(target_width * 9 / 16))
+                image = image.resize((target_width, target_height), Image.Resampling.LANCZOS)
             image.save(destination, "WEBP", quality=88, method=6)
     except Exception as exc:
         if destination.exists():
@@ -122,8 +140,8 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=0, help="Limit the number of assets for a smoke test (0 = all 106 eligible assets).")
     parser.add_argument("--force", action="store_true", help="Regenerate even if a canonical file already exists.")
     parser.add_argument("--timeout", type=int, default=900, help="Maximum seconds to wait for one ComfyUI render.")
-    parser.add_argument("--width", type=int, default=1536, help="Output width (should be a multiple of 64).")
-    parser.add_argument("--height", type=int, default=864, help="Output height (should be a multiple of 64).")
+    parser.add_argument("--width", type=int, default=1024, help="Native SDXL output width (multiples of 64; defaults to a VRAM-friendlier size).")
+    parser.add_argument("--height", type=int, default=640, help="Native SDXL output height (multiples of 64; final WebP is standardized to a wide 16:9 canvas).")
     args = parser.parse_args()
 
     base_url = os.environ.get("GA_COMFYUI_BASE_URL", "http://127.0.0.1:8188").rstrip("/")
