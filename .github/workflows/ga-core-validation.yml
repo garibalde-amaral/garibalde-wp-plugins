@@ -57,12 +57,21 @@ jobs:
           test -s site-core/garibalde-institucional/style.css
           test -s site-core/garibalde-institucional/functions.php
           test -s site-core/garibalde-institucional/index.php
-      - name: Include selected slide assets in theme
+      - name: Build clean homepage slides from prepared source images
         run: |
-          mkdir -p site-core/garibalde-institucional/assets/images/slides
-          cp packages/slide-1.png site-core/garibalde-institucional/assets/images/slides/slide-1.png
-          cp packages/slide-2.png site-core/garibalde-institucional/assets/images/slides/slide-2.png
-          cp packages/slide-3.png site-core/garibalde-institucional/assets/images/slides/slide-3.png
+          python -m pip install --disable-pip-version-check Pillow
+          python site-core/tools/prepare-home-slides.py
+          test -s site-core/garibalde-institucional/assets/images/home/HOME-01.webp
+          test -s site-core/garibalde-institucional/assets/images/home/HOME-02.webp
+          test -s site-core/garibalde-institucional/assets/images/home/HOME-03.webp
+      - name: Check canonical photo mapping logic
+        run: |
+          grep -q 'function ga_core_primary_page_slides' site-core/garibalde-institucional/inc/areas.php
+          grep -q 'function ga_core_get_area_images' site-core/garibalde-institucional/inc/areas.php
+          grep -q 'DIREITO_TRIBUTARIO-01.webp' site-core/garibalde-institucional/inc/areas.php
+          grep -q 'RELACAO_DE_CONSUMO-05.webp' site-core/garibalde-institucional/inc/areas.php
+          test -s site-core/garibalde-institucional/single-ga_area_atuacao.php
+          test -s site-core/garibalde-institucional/page-area-de-atuacao.php
       - name: Package theme ZIP
         run: |
           cd site-core
