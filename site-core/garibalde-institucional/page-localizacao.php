@@ -45,8 +45,10 @@ $map_embed = 'https://www.google.com/maps?q=' . $address_query . '&output=embed'
   </aside>
  </div>
 </section>
+<?php if ( file_exists( get_template_directory() . '/assets/images/pages/LOC-02.webp' ) ) : ?>
 <section class="ga-section ga-section--white"><div class="ga-container ga-content">
 <h2 class="ga-heading">Crédito da fotografia</h2>
-<p>Quando a vista aérea estiver incluída: Samuel Sousa, “Vista Aérea de Anápolis, 2023”, Wikimedia Commons, licença CC BY-SA 4.0. A versão do site é convertida para WebP. <a href="https://commons.wikimedia.org/wiki/File:Vista_A%C3%A9rea_de_An%C3%A1polis,_2023.jpg" target="_blank" rel="noopener noreferrer">Ver arquivo e autoria</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Ver licença</a>.</p>
+<p>Vista aérea de Anápolis (2023), de Samuel Sousa, Wikimedia Commons, licença CC BY-SA 4.0. A imagem foi redimensionada e convertida para WebP. <a href="https://commons.wikimedia.org/wiki/File:Vista_A%C3%A9rea_de_An%C3%A1polis,_2023.jpg" target="_blank" rel="noopener noreferrer">Ver arquivo e autoria</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener noreferrer">Ver licença</a>.</p>
 </div></section>
+<?php endif; ?>
 <?php get_footer(); ?>
