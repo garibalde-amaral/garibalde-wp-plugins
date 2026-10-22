@@ -1,0 +1,142 @@
+{
+  "name": "GA Core — Calendário Editorial Semanal",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "weeks",
+              "triggerAtDay": [
+                "monday"
+              ],
+              "triggerAtHour": 8,
+              "triggerAtMinute": 0
+            }
+          ]
+        }
+      },
+      "id": "ga-calendar-schedule",
+      "name": "Toda segunda-feira às 08h",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -620,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const parts = Object.fromEntries(new Intl.DateTimeFormat('en-CA',{timeZone:'America/Sao_Paulo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date()).map(p=>[p.type,p.value]));\nconst localDate = new Date(Date.UTC(Number(parts.year),Number(parts.month)-1,Number(parts.day)));\nconst monday = new Date(localDate);\nmonday.setUTCDate(monday.getUTCDate()-((monday.getUTCDay()+6)%7));\nconst iso = d => d.toISOString().slice(0,10);\nconst items = [\n {offset:0,time:'09:00',kind:'Artigo educativo',task:'Preparar um artigo informativo vinculado a uma das 15 áreas de atuação.',channel:'Site + Facebook',review:'Revisão jurídica e de fontes obrigatória.'},\n {offset:1,time:'12:00',kind:'Roteiro de vídeo curto',task:'Preparar roteiro de 30–60 segundos com pergunta frequente e resposta geral.',channel:'TikTok + YouTube Shorts',review:'Confirmar consentimento para voz/imagem e revisar roteiro.'},\n {offset:2,time:'09:00',kind:'Resumo de notícia jurídica',task:'Selecionar notícia de fonte primária, registrar URL e data, escrever resumo próprio e linkar a origem.',channel:'Site + Facebook',review:'Não publicar sem fonte primária conferida.'},\n {offset:3,time:'12:00',kind:'Carrossel educativo',task:'Adaptar um conteúdo já aprovado em 5–7 telas, sem promessa de resultado.',channel:'Facebook; outros canais somente quando conectados',review:'Revisar legibilidade, direitos de imagem e texto jurídico.'},\n {offset:4,time:'09:00',kind:'FAQ / vídeo ou artigo',task:'Responder uma dúvida geral e encaminhar atendimento individual à Central Digital do Cliente.',channel:'Site + YouTube',review:'Consulta Processual não é destino de atendimento geral.'}\n];\nconst schedule = items.map(item=>{const date=new Date(monday);date.setUTCDate(date.getUTCDate()+item.offset);return {...item,date:iso(date)};});\nconst weekLabel=iso(monday);\nconst title='Calendário editorial Garibalde — semana de '+weekLabel;\nconst content='<p><strong>Agenda semanal de produção — rascunho para revisão e aprovação editorial.</strong></p><p>Semana iniciada em '+weekLabel+'. Esta agenda organiza tarefas; não significa que os conteúdos estejam prontos, aprovados ou publicados.</p><ol>'+schedule.map(x=>'<li><h3>'+x.date+' · '+x.time+' — '+x.kind+'</h3><p>'+x.task+'</p><p><strong>Distribuição sugerida:</strong> '+x.channel+'</p><p><strong>Porta de qualidade:</strong> '+x.review+'</p><p><strong>Responsável e fonte:</strong> preencher antes de aprovar.</p></li>').join('')+'</ol><p><strong>Regra de saída:</strong> cada peça exige conferência factual, fonte quando aplicável, revisão humana, aprovação e confirmação da plataforma de destino. Este calendário não aciona publicação social.</p>';\nreturn [{json:{title,content,week_start:weekLabel,items:schedule.length,status:'draft'}}];"
+      },
+      "id": "ga-calendar-build",
+      "name": "Montar agenda da semana",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -350,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ $env.GA_WP_BASE_URL.replace(/\\/$/,'') + '/wp-json/wp/v2/posts' }}",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpBasicAuth",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({title:$json.title,content:$json.content,status:'draft'}) }}",
+        "options": {
+          "timeout": 30000
+        }
+      },
+      "id": "ga-calendar-wordpress",
+      "name": "Salvar agenda como rascunho no WordPress",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        -80,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ {ok:true,status:'calendar_draft_created',wp_post_id:$json.id,wp_status:$json.status,title:$json.title,link:$json.link,message:'Agenda semanal criada como rascunho; os itens não foram publicados.'} }}",
+        "options": {
+          "responseCode": 201
+        }
+      },
+      "id": "ga-calendar-result",
+      "name": "Registrar resultado confirmado",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        190,
+        100
+      ]
+    }
+  ],
+  "connections": {
+    "Toda segunda-feira às 08h": {
+      "main": [
+        [
+          {
+            "node": "Montar agenda da semana",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar agenda da semana": {
+      "main": [
+        [
+          {
+            "node": "Salvar agenda como rascunho no WordPress",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Salvar agenda como rascunho no WordPress": {
+      "main": [
+        [
+          {
+            "node": "Registrar resultado confirmado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "timezone": "America/Sao_Paulo",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all"
+  },
+  "versionId": "2.0.0",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": [
+    {
+      "name": "Garibalde Core"
+    }
+  ]
+}
