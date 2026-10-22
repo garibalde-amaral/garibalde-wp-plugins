@@ -1,0 +1,91 @@
+{
+  "name": "GA Core — Aprovação e Fila Social (Adaptador Pendente)",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "ga-core-social-queue",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "ga-social-webhook",
+      "name": "Receber publicação aprovada",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        -620,
+        0
+      ],
+      "webhookId": "ga-core-social-queue"
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $json.body ?? $json;\nif (d.approved !== true) throw new Error('Bloqueado: aprovação explícita obrigatória.');\nconst content_id = String(d.content_id ?? '').trim();\nconst idempotency_key = String(d.idempotency_key ?? '').trim();\nconst caption = String(d.caption ?? '').trim();\nif (!content_id || !idempotency_key || !caption) throw new Error('content_id, idempotency_key e caption são obrigatórios.');\nconst allowed = new Set(['linkedin','youtube','instagram','tiktok','facebook','x']);\nconst channels = [...new Set((Array.isArray(d.channels)?d.channels:[]).map(v=>String(v).toLowerCase()).filter(v=>allowed.has(v)))];\nif (!channels.length) throw new Error('Nenhum canal válido foi informado.');\nreturn [{json:{content_id,idempotency_key,caption,channels,approved:true,status:'queued_not_published',publish_confirmed:false,received_at:new Date().toISOString(),instruction:'Conectar um adaptador autenticado após homologar a conta e as permissões.'}}];"
+      },
+      "id": "ga-social-validate",
+      "name": "Validar aprovação e deduplicação",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -350,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={{ { ok:true, status:$json.status, content_id:$json.content_id, channels:$json.channels, publish_confirmed:false } }}",
+        "options": {
+          "responseCode": 202
+        }
+      },
+      "id": "ga-social-response",
+      "name": "Confirmar somente entrada na fila",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [
+        -70,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Receber publicação aprovada": {
+      "main": [
+        [
+          {
+            "node": "Validar aprovação e deduplicação",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Validar aprovação e deduplicação": {
+      "main": [
+        [
+          {
+            "node": "Confirmar somente entrada na fila",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "saveDataErrorExecution": "all"
+  },
+  "versionId": "2.0.0",
+  "meta": {
+    "templateCredsSetupCompleted": false
+  },
+  "tags": [
+    {
+      "name": "Garibalde Core"
+    }
+  ]
+}
