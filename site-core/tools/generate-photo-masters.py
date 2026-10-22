@@ -226,15 +226,22 @@ def main() -> int:
         if not image_path.is_file() or image_path.stat().st_size < 5000:
             missing.append({"id":asset["id"],"path":str(image_path.relative_to(ROOT))})
     eq_portrait = THEME / "assets" / "images" / "pages" / "EQ-01.webp"
+    city_photo = THEME / "assets" / "images" / "pages" / "LOC-02.webp"
+    missing_sources = []
+    if not eq_portrait.is_file() or eq_portrait.stat().st_size < 5000:
+        missing_sources.append("EQ-01")
+    if not city_photo.is_file() or city_photo.stat().st_size < 5000:
+        missing_sources.append("LOC-02")
     report["missing_eligible_after_run"] = missing
+    report["missing_source_images"] = missing_sources
     report["verified_source_assets_present"] = {
         "EQ-01": eq_portrait.is_file(),
-        "LOC-01": (THEME / "assets/images/pages/LOC-01.webp").is_file(),
-        "LOC-02": (THEME / "assets/images/pages/LOC-02.webp").is_file(),
+        "LOC-01": "real facade photo unavailable; actual address map fallback is used",
+        "LOC-02": city_photo.is_file(),
         "LOC-03": "implemented as a live map embed in page-localizacao.php",
         "LOC-04": "implemented as Google Maps/Waze route links in page-localizacao.php"
     }
-    if not report["errors"] and not missing and eq_portrait.is_file():
+    if not report["errors"] and not missing and not missing_sources:
         zip_path = ROOT / "site-core" / "garibalde-institucional-2.0.0-full-media.zip"
         with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=8) as archive:
             for file in sorted(THEME.rglob("*")):
@@ -246,14 +253,14 @@ def main() -> int:
         print(f"Theme ZIP: {zip_path}")
         print(f"SHA-256: {digest}")
     else:
-        print(f"ZIP de mídia completa NÃO criado: faltam {len(missing)} arquivos canônicos geráveis por IA ou o retrato real EQ-01.", file=sys.stderr)
+        print(f"ZIP de mídia completa NÃO criado: faltam {len(missing)} imagens geradas por IA e/ou imagens-fonte reais {missing_sources}.", file=sys.stderr)
 
     report_path = ROOT / "site-core" / "photo-generation-report.json"
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Report: {report_path}")
-    print(f"Generated: {len(report['generated'])}; skipped existing: {len(report['skipped_existing'])}; missing generated assets: {len(missing)}; source-required items: {len(report['blocked_source_required'])}; errors: {len(report['errors'])}")
+    print(f"Generated: {len(report['generated'])}; skipped existing: {len(report['skipped_existing'])}; missing generated assets: {len(missing)}; missing source images: {len(missing_sources)}; source-required items: {len(report['blocked_source_required'])}; errors: {len(report['errors'])}")
     print(report["review_status"])
-    return 1 if report["errors"] or missing or not eq_portrait.is_file() else 0
+    return 1 if report["errors"] or missing or missing_sources else 0
 
 if __name__ == "__main__":
     raise SystemExit(main())
