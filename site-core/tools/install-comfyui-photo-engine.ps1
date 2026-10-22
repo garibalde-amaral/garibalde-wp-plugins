@@ -45,11 +45,12 @@ if ($drive -and $drive.Free -lt $minimumDiskFree) {
     throw "Espaço insuficiente. Reserve pelo menos 18 GB livres para ComfyUI, modelo SDXL e imagens."
 }
 
-# If the local API is already running, do not download another engine.
+# Reuse a running server, but still verify/download the checkpoint below.
+$serverAlreadyRunning = $false
 try {
     Invoke-RestMethod -Uri "http://127.0.0.1:8188/system_stats" -TimeoutSec 3 | Out-Null
+    $serverAlreadyRunning = $true
     Write-Host "ComfyUI já está respondendo em http://127.0.0.1:8188."
-    exit 0
 } catch {}
 
 if (!(Test-Path (Join-Path $comfyDir "main.py"))) {
@@ -86,7 +87,9 @@ New-Item -ItemType Directory -Path (Split-Path -Parent $modelPath) -Force | Out-
 Download-File $modelUrl $modelPath 5000000000
 
 Write-Host "[3/3] Verificando o motor, modelo e comando de inicialização..."
-if (!(Test-Path (Join-Path $portableRoot "run_nvidia_gpu.bat"))) {
+$nvidiaRunner = Join-Path $portableRoot "run_nvidia_gpu.bat"
+$cpuRunner = Join-Path $portableRoot "run_cpu.bat"
+if (!(Test-Path $nvidiaRunner)) {
     throw "O inicializador oficial do ComfyUI não foi encontrado."
 }
 if (!(Test-Path $modelPath) -or (Get-Item $modelPath).Length -lt 5000000000) {
@@ -98,3 +101,30 @@ Write-Host "  $portableRoot"
 Write-Host "  $modelPath"
 Write-Host "Modelo: RealVisXL V4.0, publicado sob licença OpenRAIL++."
 Write-Host "O uso local é sem cobrança por chamada, mas consome armazenamento, energia e capacidade de processamento."
+
+if (!$serverAlreadyRunning) {
+    if (Get-Command "nvidia-smi.exe" -ErrorAction SilentlyContinue) {
+        $runnerToUse = $nvidiaRunner
+    } elseif (Test-Path $cpuRunner) {
+        $runnerToUse = $cpuRunner
+    } else {
+        $runnerToUse = $nvidiaRunner
+    }
+    Write-Host "Iniciando o motor em segundo plano com: $(Split-Path -Leaf $runnerToUse)"
+    Start-Process -FilePath $env:ComSpec -ArgumentList @("/c", ('"' + $runnerToUse + '"')) -WorkingDirectory $portableRoot -WindowStyle Minimized
+}
+$deadline = (Get-Date).AddMinutes(4)
+$ready = $false
+while ((Get-Date) -lt $deadline) {
+    try {
+        Invoke-RestMethod -Uri "http://127.0.0.1:8188/system_stats" -TimeoutSec 5 | Out-Null
+        $ready = $true
+        break
+    } catch {
+        Start-Sleep -Seconds 3
+    }
+}
+if (!$ready) {
+    throw "O ComfyUI não respondeu em http://127.0.0.1:8188 após a inicialização. Verifique a janela do motor e o driver gráfico."
+}
+Write-Host "Motor pronto em http://127.0.0.1:8188."
