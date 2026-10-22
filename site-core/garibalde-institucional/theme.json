@@ -1,0 +1,62 @@
+{
+  "$schema": "https://schemas.wp.org/wp/6.2/theme.json",
+  "version": 2,
+  "settings": {
+    "appearanceTools": true,
+    "layout": {
+      "contentSize": "820px",
+      "wideSize": "1200px"
+    },
+    "color": {
+      "palette": [
+        {
+          "slug": "ink",
+          "color": "#30241e",
+          "name": "Marrom institucional"
+        },
+        {
+          "slug": "gold",
+          "color": "#b99a64",
+          "name": "Dourado"
+        },
+        {
+          "slug": "paper",
+          "color": "#f7f4ef",
+          "name": "Papel"
+        },
+        {
+          "slug": "white",
+          "color": "#ffffff",
+          "name": "Branco"
+        }
+      ]
+    },
+    "typography": {
+      "fluid": true,
+      "fontFamilies": [
+        {
+          "fontFamily": "Georgia, serif",
+          "slug": "editorial",
+          "name": "Editorial"
+        },
+        {
+          "fontFamily": "system-ui, sans-serif",
+          "slug": "institutional-sans",
+          "name": "Institucional Sans"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "typography": {
+      "lineHeight": "1.65"
+    },
+    "elements": {
+      "link": {
+        "typography": {
+          "textDecoration": "underline"
+        }
+      }
+    }
+  }
+}
