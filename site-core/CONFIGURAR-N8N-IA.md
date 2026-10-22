@@ -4,6 +4,7 @@
 - `n8n/GA-01-inbox-editorial.json`: entrada e validação de pauta.
 - `n8n/GA-02-aprovacao-e-fila-social.json`: valida a aprovação e prepara a fila; **não publica** em rede social.
 - `n8n/GA-03-gerar-rascunho-IA-WordPress.json`: gera rascunho por API compatível com OpenAI e envia ao WordPress como `draft`; não publica automaticamente.
+- `n8n/GA-04-calendario-editorial-semanal.json`: (quando incluído) cria uma agenda semanal como rascunho editorial no WordPress, sem publicar os itens do calendário.
 
 ## Pré-requisitos
 - Instância n8n controlada e acessível por HTTPS.
@@ -17,8 +18,7 @@ No servidor n8n, configurar no gerenciador seguro de ambiente:
 - `GA_AI_MODEL`: padrão `qwen2.5:7b`; precisa estar instalado no Ollama.
 - `GA_AI_API_KEY`: opcional no Ollama local; em provedor de nuvem, usar a chave real em segredo protegido.
 - `GA_WP_BASE_URL`: URL HTTPS do WordPress, sem barra final.
-- `GA_WP_USERNAME`: usuário WordPress dedicado.
-- `GA_WP_APPLICATION_PASSWORD`: Application Password desse usuário.
+- No nó “Criar rascunho no WordPress”, selecione a credencial n8n **HTTP Basic Auth** com o usuário WordPress dedicado e a respectiva Application Password.
 
 A expressão `$env` precisa estar permitida na instalação n8n; em ambientes que bloqueiam o acesso a variáveis, substitua as expressões por credenciais nativas de cada node. Nunca coloque segredos no JSON exportado, GitHub, prints ou arquivos compartilhados.
 
