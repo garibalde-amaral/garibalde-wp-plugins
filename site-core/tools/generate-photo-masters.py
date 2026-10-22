@@ -8,6 +8,7 @@ the real team portraits, real office/location photos or a fake map.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import io
 import json
 import os
@@ -17,6 +18,7 @@ import time
 import urllib.error
 import urllib.parse
 import urllib.request
+import zipfile
 from pathlib import Path
 from typing import Any
 
@@ -197,12 +199,43 @@ def main() -> int:
             print(f"[{index}/{len(assets)}] ERROR {asset.get('id')}: {exc}", file=sys.stderr)
             break
 
+    # Package only when every AI-eligible canonical asset exists and the approved real portrait is present.
+    # The office/location photos are deliberately not fabricated; the location template uses a real map/route service.
+    all_eligible = [a for a in manifest["assets"] if a.get("generation_allowed") is True and a.get("prompt")]
+    missing = []
+    for asset in all_eligible:
+        image_path = THEME / str(asset["destination"]).strip("/") / str(asset["filename"])
+        if not image_path.is_file() or image_path.stat().st_size < 5000:
+            missing.append({"id":asset["id"],"path":str(image_path.relative_to(ROOT))})
+    eq_portrait = THEME / "assets" / "images" / "pages" / "EQ-01.webp"
+    report["missing_eligible_after_run"] = missing
+    report["verified_source_assets_present"] = {
+        "EQ-01": eq_portrait.is_file(),
+        "LOC-01": (THEME / "assets/images/pages/LOC-01.webp").is_file(),
+        "LOC-02": (THEME / "assets/images/pages/LOC-02.webp").is_file(),
+        "LOC-03": "implemented as a live map embed in page-localizacao.php",
+        "LOC-04": "implemented as Google Maps/Waze route links in page-localizacao.php"
+    }
+    if not report["errors"] and not missing and eq_portrait.is_file():
+        zip_path = ROOT / "site-core" / "garibalde-institucional-2.0.0-full-media.zip"
+        with zipfile.ZipFile(zip_path, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=8) as archive:
+            for file in sorted(THEME.rglob("*")):
+                if file.is_file():
+                    archive.write(file, Path("garibalde-institucional") / file.relative_to(THEME))
+        digest = hashlib.sha256(zip_path.read_bytes()).hexdigest()
+        report["theme_zip"] = str(zip_path.relative_to(ROOT))
+        report["theme_zip_sha256"] = digest
+        print(f"Theme ZIP: {zip_path}")
+        print(f"SHA-256: {digest}")
+    else:
+        print(f"ZIP de mídia completa NÃO criado: faltam {len(missing)} arquivos canônicos geráveis por IA ou o retrato real EQ-01.", file=sys.stderr)
+
     report_path = ROOT / "site-core" / "photo-generation-report.json"
     report_path.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(f"Report: {report_path}")
-    print(f"Generated: {len(report['generated'])}; skipped existing: {len(report['skipped_existing'])}; blocked for real source: {len(report['blocked_source_required'])}; errors: {len(report['errors'])}")
+    print(f"Generated: {len(report['generated'])}; skipped existing: {len(report['skipped_existing'])}; missing generated assets: {len(missing)}; source-required items: {len(report['blocked_source_required'])}; errors: {len(report['errors'])}")
     print(report["review_status"])
-    return 1 if report["errors"] else 0
+    return 1 if report["errors"] or missing or not eq_portrait.is_file() else 0
 
 if __name__ == "__main__":
     raise SystemExit(main())
