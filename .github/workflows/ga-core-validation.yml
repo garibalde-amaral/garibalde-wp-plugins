@@ -55,7 +55,7 @@ jobs:
       - name: Validate canonical photo manifest
         run: |
           python site-core/tools/test-photo-manifest.py
-          python -m py_compile site-core/tools/prepare-home-slides.py site-core/tools/generate-photo-masters.py site-core/tools/test-photo-manifest.py
+          python -m py_compile site-core/tools/prepare-home-slides.py site-core/tools/generate-photo-masters.py site-core/tools/test-photo-manifest.py site-core/tools/fetch-real-source-assets.py
       - name: Check theme minimum files
         run: |
           test -s site-core/garibalde-institucional/style.css
@@ -68,6 +68,11 @@ jobs:
           test -s site-core/garibalde-institucional/assets/images/home-preview/slide-1-preview.webp
           test -s site-core/garibalde-institucional/assets/images/home-preview/slide-2-preview.webp
           test -s site-core/garibalde-institucional/assets/images/home-preview/slide-3-preview.webp
+      - name: Import real-source photo assets and preserve license credits
+        run: |
+          python site-core/tools/fetch-real-source-assets.py
+          test -s site-core/garibalde-institucional/assets/images/pages/LOC-02.webp
+          grep -q 'CC BY-SA 4.0' site-core/PHOTO-CREDITS.md
       - name: Check canonical photo mapping logic
         run: |
           grep -q 'function ga_core_primary_page_slides' site-core/garibalde-institucional/inc/areas.php
