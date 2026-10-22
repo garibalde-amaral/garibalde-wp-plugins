@@ -57,7 +57,8 @@ function ga_core_seed_areas() {
         $content = '<p>' . esc_html($area['lead']) . '</p><h2>Como a análise jurídica é estruturada</h2><p>' . esc_html($area['copy']) . '</p><h2>Temas relacionados</h2><p>' . esc_html($area['focus']) . '</p><p>O conteúdo é informativo e não substitui a análise individual de documentos e circunstâncias. A aplicação de regras, prazos e estratégias depende da verificação dos fatos e da legislação vigente pertinente.</p>';
         $id = wp_insert_post(array(
             'post_type' => 'ga_area_atuacao',
-            'post_status' => 'publish',
+            // New starter copy is created as a draft so editorial/legal review precedes public display.
+            'post_status' => 'draft',
             'post_title' => $area['title'],
             'post_name' => $area['slug'],
             'post_content' => $content,
