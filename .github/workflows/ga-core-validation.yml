@@ -55,6 +55,9 @@ jobs:
           }
           NODE
 
+      - name: Install photo build dependency
+        run: python -m pip install --disable-pip-version-check Pillow
+
       - name: Validate canonical photo manifest
         run: |
           python site-core/tools/test-photo-manifest.py
