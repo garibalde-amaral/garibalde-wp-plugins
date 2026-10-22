@@ -7,12 +7,19 @@ $repoRoot = Split-Path -Parent $siteCoreDir
 $toolchain = Join-Path $siteCoreDir "toolchain"
 $portableRoot = Join-Path $toolchain "ComfyUI_windows_portable"
 $extractRoot = Join-Path $toolchain "_comfyui_extract_tmp"
-$archive = Join-Path $toolchain "ComfyUI_windows_portable_nvidia.7z"
+$archive = Join-Path $toolchain $portableArchiveName
 $extractor = Join-Path $toolchain "7zr.exe"
 $comfyDir = Join-Path $portableRoot "ComfyUI"
 $modelName = "RealVisXL_V4.0.safetensors"
 $modelPath = Join-Path (Join-Path $comfyDir "models\checkpoints") $modelName
-$portableUrl = "https://github.com/comfyanonymous/ComfyUI/releases/latest/download/ComfyUI_windows_portable_nvidia.7z"
+$gpuNames = @()
+try { $gpuNames = @(Get-CimInstance Win32_VideoController | ForEach-Object { [string]$_.Name }) } catch {}
+$gpuText = $gpuNames -join "; "
+$portableFlavor = "nvidia"
+if ($gpuText -match "AMD|Radeon") { $portableFlavor = "amd" }
+elseif ($gpuText -match "Intel Arc") { $portableFlavor = "intel" }
+$portableArchiveName = "ComfyUI_windows_portable_" + $portableFlavor + ".7z"
+$portableUrl = "https://github.com/Comfy-Org/ComfyUI/releases/latest/download/" + $portableArchiveName
 $extractorUrl = "https://www.7-zip.org/a/7zr.exe"
 $modelUrl = "https://huggingface.co/SG161222/RealVisXL_V4.0/resolve/main/RealVisXL_V4.0.safetensors?download=true"
 $minimumDiskFree = 18GB
@@ -63,8 +70,10 @@ if (!(Test-Path (Join-Path $comfyDir "main.py"))) {
     & $extractor x $archive "-o$extractRoot" -y | Out-Host
     if ($LASTEXITCODE -ne 0) { throw "Falha ao extrair o ComfyUI portátil." }
 
-    $runner = Get-ChildItem -Path $extractRoot -Recurse -File -Filter "run_nvidia_gpu.bat" | Select-Object -First 1
-    if (!$runner) { throw "O arquivo run_nvidia_gpu.bat não foi encontrado no pacote oficial extraído." }
+    $runner = Get-ChildItem -Path $extractRoot -Recurse -File -Filter "run_*.bat" |
+        Where-Object { $_.Name -match "^run_(nvidia_gpu|amd_gpu|intel_gpu|cpu)\.bat$" } |
+        Select-Object -First 1
+    if (!$runner) { throw "Nenhum inicializador run_*.bat foi encontrado no pacote oficial extraído." }
     $extractedPortable = $runner.Directory.FullName
     New-Item -ItemType Directory -Path $portableRoot -Force | Out-Null
     Get-ChildItem -Path $extractedPortable -Force | ForEach-Object {
@@ -87,10 +96,14 @@ New-Item -ItemType Directory -Path (Split-Path -Parent $modelPath) -Force | Out-
 Download-File $modelUrl $modelPath 5000000000
 
 Write-Host "[3/3] Verificando o motor, modelo e comando de inicialização..."
-$nvidiaRunner = Join-Path $portableRoot "run_nvidia_gpu.bat"
-$cpuRunner = Join-Path $portableRoot "run_cpu.bat"
-if (!(Test-Path $nvidiaRunner)) {
-    throw "O inicializador oficial do ComfyUI não foi encontrado."
+$runnerCandidates = @(
+    (Join-Path $portableRoot "run_nvidia_gpu.bat"),
+    (Join-Path $portableRoot "run_amd_gpu.bat"),
+    (Join-Path $portableRoot "run_intel_gpu.bat"),
+    (Join-Path $portableRoot "run_cpu.bat")
+)
+if (-not ($runnerCandidates | Where-Object { Test-Path $_ })) {
+    throw "Nenhum inicializador oficial do ComfyUI foi encontrado."
 }
 if (!(Test-Path $modelPath) -or (Get-Item $modelPath).Length -lt 5000000000) {
     throw "Checkpoint SDXL ausente ou pequeno demais."
@@ -103,12 +116,16 @@ Write-Host "Modelo: RealVisXL V4.0, publicado sob licença OpenRAIL++."
 Write-Host "O uso local é sem cobrança por chamada, mas consome armazenamento, energia e capacidade de processamento."
 
 if (!$serverAlreadyRunning) {
-    if (Get-Command "nvidia-smi.exe" -ErrorAction SilentlyContinue) {
-        $runnerToUse = $nvidiaRunner
-    } elseif (Test-Path $cpuRunner) {
-        $runnerToUse = $cpuRunner
+    if ($gpuText -match "NVIDIA" -and (Test-Path (Join-Path $portableRoot "run_nvidia_gpu.bat"))) {
+        $runnerToUse = Join-Path $portableRoot "run_nvidia_gpu.bat"
+    } elseif ($gpuText -match "AMD|Radeon" -and (Test-Path (Join-Path $portableRoot "run_amd_gpu.bat"))) {
+        $runnerToUse = Join-Path $portableRoot "run_amd_gpu.bat"
+    } elseif ($gpuText -match "Intel Arc" -and (Test-Path (Join-Path $portableRoot "run_intel_gpu.bat"))) {
+        $runnerToUse = Join-Path $portableRoot "run_intel_gpu.bat"
+    } elseif (Test-Path (Join-Path $portableRoot "run_cpu.bat")) {
+        $runnerToUse = Join-Path $portableRoot "run_cpu.bat"
     } else {
-        $runnerToUse = $nvidiaRunner
+        $runnerToUse = $runnerCandidates | Where-Object { Test-Path $_ } | Select-Object -First 1
     }
     Write-Host "Iniciando o motor em segundo plano com: $(Split-Path -Leaf $runnerToUse)"
     Start-Process -FilePath $env:ComSpec -ArgumentList @("/c", ('"' + $runnerToUse + '"')) -WorkingDirectory $portableRoot -WindowStyle Minimized
