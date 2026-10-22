@@ -1,0 +1,53 @@
+name: GA Core Theme Validation
+
+on:
+  push:
+    branches:
+      - site-core-modernization-v2
+    paths:
+      - 'site-core/**'
+      - '.github/workflows/ga-core-validation.yml'
+  pull_request:
+    paths:
+      - 'site-core/**'
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax
+        run: |
+          find site-core/garibalde-institucional -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+      - name: JavaScript syntax
+        run: node --check site-core/garibalde-institucional/assets/site.js
+      - name: Validate n8n workflow JSON
+        run: |
+          python - <<'PY'
+          import json, pathlib
+          for path in pathlib.Path('site-core/n8n').glob('*.json'):
+              data = json.loads(path.read_text(encoding='utf-8'))
+              assert data.get('nodes'), f'{path}: missing nodes'
+              assert data.get('connections') is not None, f'{path}: missing connections'
+              print(f'OK: {path}')
+          PY
+      - name: Check theme minimum files
+        run: |
+          test -s site-core/garibalde-institucional/style.css
+          test -s site-core/garibalde-institucional/functions.php
+          test -s site-core/garibalde-institucional/index.php
+      - name: Package theme ZIP
+        run: |
+          cd site-core
+          zip -r garibalde-institucional-2.0.0.zip garibalde-institucional
+          unzip -t garibalde-institucional-2.0.0.zip
+      - name: Upload theme artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: garibalde-institucional-2.0.0
+          path: site-core/garibalde-institucional-2.0.0.zip
+          if-no-files-found: error
+          retention-days: 30
