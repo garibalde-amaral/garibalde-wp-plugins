@@ -10,5 +10,5 @@
  <span class="ga-brand-text">GARIBALDE AMARAL<small>ADVOGADOS ASSOCIADOS</small></span>
 </a>
 <div class="ga-header-actions"><a class="ga-button" href="<?php echo esc_url(home_url('/central-digital-do-cliente/')); ?>">Central Digital do Cliente</a><a class="ga-button ga-button--light" href="https://wa.me/5562991340228" rel="noopener noreferrer">WhatsApp</a></div>
-</div><nav class="ga-primary-nav" id="ga-primary-nav" aria-label="Navegação principal"><div class="ga-container"><button class="ga-menu-toggle" type="button" aria-expanded="false" aria-controls="ga-primary-menu">Menu ☰</button><?php if(has_nav_menu('primary')){wp_nav_menu(array('theme_location'=>'primary','container'=>false,'menu_id'=>'ga-primary-menu','fallback_cb'=>false));}else{ga_core_menu_fallback();} ?></div></nav></header>
+</div><nav class="ga-primary-nav" id="ga-primary-nav" aria-label="Navegação principal"><div class="ga-container"><button class="ga-menu-toggle" type="button" aria-expanded="false" aria-controls="ga-primary-menu">Menu ☰</button><?php ga_core_menu_fallback(); ?></div></nav></header>
 <main id="ga-main">
