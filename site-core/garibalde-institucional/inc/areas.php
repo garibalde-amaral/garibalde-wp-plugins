@@ -262,3 +262,30 @@ function ga_core_primary_page_asset_url($filename) {
     }
     return '';
 }
+
+function ga_core_home_asset_url($filename) {
+    $filename = sanitize_file_name((string)$filename);
+    if ( ! $filename ) { return ''; }
+    $relative = 'assets/images/home/' . $filename;
+    $base = trailingslashit(get_template_directory()) . $relative;
+    $web = trailingslashit(get_template_directory_uri()) . $relative;
+    if ( is_file($base) ) { return $web . rawurlencode($filename); }
+    $attachments = get_posts(array(
+        'post_type' => 'attachment',
+        'post_status' => 'inherit',
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'meta_query' => array(array(
+            'key' => '_wp_attached_file',
+            'value' => '/' . $filename,
+            'compare' => 'LIKE',
+        )),
+    ));
+    if ( ! empty($attachments[0]) ) {
+        $url = wp_get_attachment_image_url((int)$attachments[0], 'full');
+        if ( $url ) { return $url; }
+    }
+    return '';
+}
+
