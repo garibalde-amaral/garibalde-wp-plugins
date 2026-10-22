@@ -15,49 +15,63 @@ echo Nenhuma foto antiga com texto embutido sera reutilizada.
 echo Nenhuma fachada, mapa ou retrato real sera inventado pela IA.
 echo.
 
-where python >nul 2>nul
+echo.
+echo [1/5] Instalando e iniciando automaticamente o motor local de IA...
+powershell -NoProfile -ExecutionPolicy Bypass -File "site-core\tools\install-comfyui-photo-engine.ps1"
 if errorlevel 1 (
-  echo ERRO: Python 3 nao foi encontrado. Instale Python 3.10+ e marque "Add Python to PATH".
+  echo ERRO: nao foi possivel preparar ComfyUI/SDXL. Confira internet, espaco livre e hardware.
   pause
   exit /b 2
 )
 
-python -c "import PIL" >nul 2>nul
-if errorlevel 1 (
-  echo Instalando a dependencia Pillow para validar e otimizar as imagens...
-  python -m pip install --disable-pip-version-check Pillow
+set "PYTHON_EXE=site-core\toolchain\ComfyUI_windows_portable\python_embeded\python.exe"
+if not exist "%PYTHON_EXE%" (
+  where python >nul 2>nul
   if errorlevel 1 (
-    echo ERRO: nao foi possivel instalar Pillow.
+    echo ERRO: Python nao encontrado no ambiente do ComfyUI nem no PATH.
+    pause
+    exit /b 2
+  )
+  set "PYTHON_EXE=python"
+)
+
+"%PYTHON_EXE%" -c "import PIL" >nul 2>nul
+if errorlevel 1 (
+  "%PYTHON_EXE%" -m ensurepip --upgrade
+  "%PYTHON_EXE%" -m pip install --disable-pip-version-check Pillow
+  if errorlevel 1 (
+    echo ERRO: nao foi possivel instalar Pillow no Python selecionado.
     pause
     exit /b 2
   )
 )
 
+set "GA_COMFYUI_BASE_URL=http://127.0.0.1:8188"
+set "GA_COMFYUI_CHECKPOINT=RealVisXL_V4.0.safetensors"
+
 echo.
-echo [1/4] Procurando fontes reais e baixando a vista licenciada de Anapolis...
-python site-core/tools/fetch-real-source-assets.py
+echo [2/5] Procurando fontes reais e baixando a vista licenciada de Anapolis...
+"%PYTHON_EXE%" site-core/tools/fetch-real-source-assets.py
 if errorlevel 1 (
-  echo AVISO: nem todas as fotografias que exigem fonte real foram localizadas.
-  echo A geracao de fotos editoriais vai continuar, mas o ZIP final sera bloqueado
-  echo se retrato/fachada/acesso reais continuarem ausentes.
+  echo AVISO: algum ativo que exige uma fonte real nao foi encontrado.
+  echo Nenhuma fachada ou pessoa real sera inventada. O mapa/rota e mantido como alternativa.
 )
 
 echo.
-echo [2/4] Gerando automaticamente os 106 mestres elegiveis do Livro Visual Mestre.
-echo IMPORTANTE: o ComfyUI deve estar aberto e com checkpoint SDXL fotorealistico instalado.
-python site-core/tools/generate-photo-masters.py
+echo [3/5] Gerando automaticamente os 106 mestres elegiveis do Livro Visual Mestre.
+echo O trabalho usa o checkpoint SDXL local e pode levar bastante tempo conforme o hardware.
+"%PYTHON_EXE%" site-core/tools/generate-photo-masters.py
 if errorlevel 1 (
   echo.
-  echo ERRO: a geracao por IA falhou. Nenhum ZIP instalavel sera criado.
-  echo Abra o ComfyUI, confirme que o checkpoint SDXL aparece em Settings/Models
-  echo e execute este arquivo novamente.
+  echo ERRO: a geracao por IA falhou. Nenhum ZIP final sera considerado valido.
+  echo O relatorio de erro esta em site-core\photo-generation-report.json.
   pause
   exit /b 3
 )
 
 echo.
-echo [3/4] Conferindo os 111 arquivos canonicos, dimensoes e fontes oficiais...
-python site-core/tools/check-photo-assets.py
+echo [4/5] Conferindo os 111 itens canonicos, dimensoes e fontes oficiais...
+"%PYTHON_EXE%" site-core/tools/check-photo-assets.py
 if errorlevel 1 (
   echo.
   echo ZIP NAO CRIADO: o relatorio acima mostra quais arquivos reais ainda faltam.
@@ -68,7 +82,7 @@ if errorlevel 1 (
 )
 
 echo.
-echo [4/4] Montando o ZIP completo do tema...
+echo [5/5] Montando o ZIP completo do tema...
 powershell -NoProfile -ExecutionPolicy Bypass -File "site-core\BUILD-THEME.ps1"
 if errorlevel 1 (
   echo ERRO: falha na montagem do ZIP.
