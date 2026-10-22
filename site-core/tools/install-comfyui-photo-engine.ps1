@@ -1,5 +1,5 @@
 $ErrorActionPreference = "Stop"
-$ProgressPreference = "SilentlyContinue"
+$ProgressPreference = "Continue"
 
 $toolsDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $siteCoreDir = Split-Path -Parent $toolsDir
@@ -7,7 +7,6 @@ $repoRoot = Split-Path -Parent $siteCoreDir
 $toolchain = Join-Path $siteCoreDir "toolchain"
 $portableRoot = Join-Path $toolchain "ComfyUI_windows_portable"
 $extractRoot = Join-Path $toolchain "_comfyui_extract_tmp"
-$archive = Join-Path $toolchain $portableArchiveName
 $extractor = Join-Path $toolchain "7zr.exe"
 $comfyDir = Join-Path $portableRoot "ComfyUI"
 $modelName = "RealVisXL_V4.0.safetensors"
@@ -19,6 +18,7 @@ $portableFlavor = "nvidia"
 if ($gpuText -match "AMD|Radeon") { $portableFlavor = "amd" }
 elseif ($gpuText -match "Intel Arc") { $portableFlavor = "intel" }
 $portableArchiveName = "ComfyUI_windows_portable_" + $portableFlavor + ".7z"
+$archive = Join-Path $toolchain $portableArchiveName
 $portableUrl = "https://github.com/Comfy-Org/ComfyUI/releases/latest/download/" + $portableArchiveName
 $extractorUrl = "https://www.7-zip.org/a/7zr.exe"
 $modelUrl = "https://huggingface.co/SG161222/RealVisXL_V4.0/resolve/main/RealVisXL_V4.0.safetensors?download=true"
