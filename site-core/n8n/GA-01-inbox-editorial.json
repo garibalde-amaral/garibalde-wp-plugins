@@ -6,7 +6,8 @@
         "httpMethod": "POST",
         "path": "ga-core-editorial-inbox",
         "responseMode": "lastNode",
-        "options": {}
+        "options": {},
+        "authentication": "headerAuth"
       },
       "id": "ga-inbox-webhook",
       "name": "Receber pauta",
