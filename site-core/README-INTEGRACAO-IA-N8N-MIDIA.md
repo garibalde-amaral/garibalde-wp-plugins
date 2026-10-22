@@ -29,3 +29,9 @@ O site deve ter uma operação editorial rastreável: pauta -> fonte -> rascunho
 - Mensal: relatório de desempenho, auditoria de links, revisão das fontes e calendário do mês seguinte.
 
 Este é um calendário-base a validar; não representa publicações agendadas. Para ativar, escolher canais reais, fuso horário, conta do agendador, modelo de IA e regras de aprovação.
+
+
+## Agendamento social: dependência externa verificada em 22/10/2026
+A documentação oficial do Metricool informa que a API REST externa de agendamento está disponível nos planos Advanced e Custom; Free e Starter não incluem acesso à API. A conexão Metricool/MCP disponível neste assistente não equivale a uma credencial de API REST para o n8n. Fonte oficial: https://help.metricool.com/pt/guia-basico-para-integracao-com-a-api-r97af.
+
+Por isso, nesta versão o fluxo social é uma fila validada, **não um publicador ativo**. Antes de concluir o adaptador, confirmar o plano da conta, a existência de token API, o ID de usuário/marca, permissões e os campos de mídia obrigatórios por canal. Não comprar upgrade automaticamente. Se a conta não tiver API REST, manter calendário e rascunhos e usar o agendador nativo da ferramenta enquanto se avalia alternativa compatível com o orçamento.
