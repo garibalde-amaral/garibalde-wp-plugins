@@ -1,5 +1,6 @@
 <?php
 if ( ! defined( 'ABSPATH' ) ) { exit; }
+require_once get_template_directory() . '/inc/areas.php';
 define( 'GA_CORE_THEME_VERSION', '2.0.0' );
 function ga_core_setup() {
  load_theme_textdomain( 'ga-core', get_template_directory() . '/languages' );
