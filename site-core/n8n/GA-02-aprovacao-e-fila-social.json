@@ -6,7 +6,8 @@
         "httpMethod": "POST",
         "path": "ga-core-social-queue",
         "responseMode": "lastNode",
-        "options": {}
+        "options": {},
+        "authentication": "headerAuth"
       },
       "id": "ga-social-webhook",
       "name": "Receber publicação aprovada",
