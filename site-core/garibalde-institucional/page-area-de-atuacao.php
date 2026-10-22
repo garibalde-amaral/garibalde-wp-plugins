@@ -9,7 +9,7 @@ $hub_assets = array(
  array('id'=>'AA-04','file'=>'AA-04.webp','title'=>'Tecnologia a serviço da informação'),
 );
 $slides = array();
-foreach($hub_assets as $asset){$url=ga_core_area_asset_url($asset['file']);if($url){$slides[]=array_merge($asset,array('url'=>$url));}}
+foreach($hub_assets as $asset){$url=function_exists('ga_core_primary_page_asset_url')?ga_core_primary_page_asset_url($asset['file']):'';if($url){$slides[]=array_merge($asset,array('url'=>$url));}}
 ?>
 <?php if(!empty($slides)): ?>
 <section class="ga-hero ga-hero--image" data-ga-carousel data-ga-interval="7000">
