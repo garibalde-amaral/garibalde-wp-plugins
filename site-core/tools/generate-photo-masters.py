@@ -126,9 +126,6 @@ def main() -> int:
 
     base_url = os.environ.get("GA_COMFYUI_BASE_URL", "http://127.0.0.1:8188").rstrip("/")
     checkpoint = os.environ.get("GA_COMFYUI_CHECKPOINT", "").strip()
-    if not checkpoint or checkpoint.upper().startswith("YOUR_"):
-        print("ERROR: set GA_COMFYUI_CHECKPOINT to the exact installed checkpoint filename.", file=sys.stderr)
-        return 2
     if args.width % 64 or args.height % 64:
         print("ERROR: width and height must be multiples of 64.", file=sys.stderr)
         return 2
@@ -153,9 +150,23 @@ def main() -> int:
 
     try:
         request_json(base_url + "/system_stats", timeout=15)
+        if not checkpoint or checkpoint.upper().startswith("YOUR_"):
+            object_info = request_json(base_url + "/object_info/CheckpointLoaderSimple", timeout=20)
+            loader = object_info.get("CheckpointLoaderSimple", {})
+            required = loader.get("input", {}).get("required", {})
+            checkpoint_options = required.get("ckpt_name", [[]])[0]
+            if not isinstance(checkpoint_options, list):
+                checkpoint_options = []
+            preferred = ("sdxl", "realvisxl", "juggernautxl", "dreamshaperxl", "albedobasexl")
+            match = next((name for token in preferred for name in checkpoint_options if token in str(name).lower()), None)
+            if not match:
+                listed = ", ".join(str(name) for name in checkpoint_options[:12]) or "(nenhum checkpoint listado)"
+                raise RuntimeError("Nenhum checkpoint SDXL reconhecido foi encontrado. Checkpoints disponíveis: " + listed + ". Instale um checkpoint SDXL fotorealista licenciado ou configure GA_COMFYUI_CHECKPOINT.")
+            checkpoint = str(match)
+            print(f"Auto-detected SDXL checkpoint: {checkpoint}")
     except Exception as exc:
-        print(f"ERROR: ComfyUI is not reachable at {base_url}. {exc}", file=sys.stderr)
-        print("Start ComfyUI locally or set GA_COMFYUI_BASE_URL to a reachable private endpoint.", file=sys.stderr)
+        print(f"ERROR: ComfyUI/checkpoint validation failed at {base_url}. {exc}", file=sys.stderr)
+        print("Start ComfyUI locally or set GA_COMFYUI_BASE_URL to a reachable private endpoint. Install a compatible SDXL checkpoint.", file=sys.stderr)
         return 3
 
     for index, asset in enumerate(assets, start=1):
