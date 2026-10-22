@@ -102,6 +102,25 @@ jobs:
           if-no-files-found: error
           retention-days: 30
 
+      - name: Package source and automation bundle
+        if: always()
+        run: |
+          cd site-core
+          zip -r ga-core-source-and-automation-2.0.0.zip . \
+            -x "ga-core-source-and-automation-2.0.0.zip" \
+               "garibalde-institucional-2.0.0.zip" \
+               "photo-generation-report.json" \
+               "photo-assets-readiness.json"
+          unzip -t ga-core-source-and-automation-2.0.0.zip
+      - name: Publish source and automation bundle
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ga-core-source-and-automation-2.0.0
+          path: site-core/ga-core-source-and-automation-2.0.0.zip
+          if-no-files-found: error
+          retention-days: 30
+
       - name: Explain why no installable ZIP was made
         if: steps.photo_check.outcome != 'success'
         run: |
