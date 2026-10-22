@@ -20,8 +20,8 @@ function ga_core_areas_catalog() {
         array('title'=>'Direito Eleitoral','slug'=>'direito-eleitoral','image1'=>'DIREITO_ELEITORAL-01.webp','image2'=>'DIREITO_ELEITORAL-02.webp','lead'=>'Acompanhamento jurídico de questões eleitorais com atenção a prazos, registros, propaganda e prestação de contas.','copy'=>'O ambiente eleitoral possui calendários e regras próprias, que variam conforme o pleito e o ato praticado. A avaliação deve conferir as normas vigentes, as orientações oficiais aplicáveis e a documentação específica, sem extrapolar informação não confirmada.','focus'=>'Orientação eleitoral; análise de propaganda e conteúdo; registros e documentos; prestação de contas; acompanhamento de procedimentos.'),
         array('title'=>'Empresarial e Recuperação de Empresas','slug'=>'empresarial-recuperacao-empresas','image1'=>'EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-01.webp','image2'=>'EMPRESARIAL_E_RECUPERACAO_DE_EMPRESAS-04.webp','lead'=>'Estratégia jurídica empresarial para contratos, governança, reorganização e enfrentamento de crises.','copy'=>'A atuação empresarial considera a estrutura da organização, os contratos, os riscos operacionais, os credores e a continuidade das atividades. Em situações de crise, a análise documentada das alternativas deve anteceder decisões que afetem o negócio e seus interessados.','focus'=>'Contratos empresariais; governança; negociação com credores; reorganização; prevenção de litígios; avaliação de alternativas legalmente disponíveis.'),
         array('title'=>'Justiça Desportiva','slug'=>'justica-desportiva','image1'=>'JUSTICA_DESPORTIVA-01.webp','image2'=>'JUSTICA_DESPORTIVA-05.webp','lead'=>'Análise jurídica de relações e controvérsias desportivas, regulamentos e procedimentos disciplinares.','copy'=>'Questões desportivas demandam identificação da entidade competente, do regulamento aplicável, dos prazos e dos meios de impugnação previstos. A estratégia depende dos fatos, da documentação e da estrutura normativa da modalidade e da competição.','focus'=>'Regulamentos e contratos desportivos; procedimentos disciplinares; direitos e deveres de atletas e entidades; análise de decisões e recursos cabíveis.'),
-        array('title'=>'Direito Previdenciário','slug'=>'direito-previdenciario','image1'=>'DIREITO_PREVIDENCIARIO-01.webp','image2'=>'DIREITO_PREVIDENCIARIO-02.webp','lead'=>'Orientação jurídica previdenciária baseada no histórico contributivo, nos documentos e nas regras aplicáveis.','copy'=>'A avaliação previdenciária depende dos vínculos, contribuições, períodos reconhecíveis, documentos e requisitos vigentes na data relevante. Simulações não substituem conferência dos dados oficiais e não garantem a concessão de benefício.','focus'=>'Análise de histórico contributivo; requerimentos e recursos administrativos; organização documental; revisão de decisões; planejamento previdenciário individualizado.'),
-        array('title'=>'Relação de Consumo','slug'=>'relacao-consumo','image1'=>'RELACAO_DE_CONSUMO-01.webp','image2'=>'RELACAO_DE_CONSUMO-02.webp','lead'=>'Tratamento jurídico de conflitos de consumo com base em contratos, oferta, comprovantes e histórico de atendimento.','copy'=>'A análise de uma relação de consumo exige identificar o produto ou serviço, a oferta, os documentos, as comunicações e a sequência dos acontecimentos. A orientação deve distinguir fatos comprovados de alegações e avaliar soluções proporcionais ao caso.','focus'=>'Contratos de consumo; vícios e falhas de serviço; cobranças; atendimento e reclamações; negociação; medidas administrativas ou judiciais adequadas.'),
+        array('title'=>'Direito Previdenciário','slug'=>'direito-previdenciario','image1'=>'DIREITO_PREVIDENCIARIO-04.webp','image2'=>'DIREITO_PREVIDENCIARIO-01.webp','lead'=>'Orientação jurídica previdenciária baseada no histórico contributivo, nos documentos e nas regras aplicáveis.','copy'=>'A avaliação previdenciária depende dos vínculos, contribuições, períodos reconhecíveis, documentos e requisitos vigentes na data relevante. Simulações não substituem conferência dos dados oficiais e não garantem a concessão de benefício.','focus'=>'Análise de histórico contributivo; requerimentos e recursos administrativos; organização documental; revisão de decisões; planejamento previdenciário individualizado.'),
+        array('title'=>'Relação de Consumo','slug'=>'relacao-consumo','image1'=>'RELACAO_DE_CONSUMO-01.webp','image2'=>'RELACAO_DE_CONSUMO-05.webp','lead'=>'Tratamento jurídico de conflitos de consumo com base em contratos, oferta, comprovantes e histórico de atendimento.','copy'=>'A análise de uma relação de consumo exige identificar o produto ou serviço, a oferta, os documentos, as comunicações e a sequência dos acontecimentos. A orientação deve distinguir fatos comprovados de alegações e avaliar soluções proporcionais ao caso.','focus'=>'Contratos de consumo; vícios e falhas de serviço; cobranças; atendimento e reclamações; negociação; medidas administrativas ou judiciais adequadas.'),
         array('title'=>'Direito Tributário','slug'=>'direito-tributario','image1'=>'DIREITO_TRIBUTARIO-01.webp','image2'=>'DIREITO_TRIBUTARIO-02.webp','lead'=>'Análise jurídica de obrigações tributárias, conformidade fiscal, controvérsias e alternativas legalmente disponíveis.','copy'=>'Questões tributárias exigem verificar o tributo, o período, a atividade, os documentos, os prazos e a norma vigente aplicável. Planejamentos e contestações precisam ser fundamentados em dados reais e avaliação individualizada, sem promessas de economia ou resultado.','focus'=>'Obrigações e procedimentos fiscais; análise de autuações; planejamento dentro da legalidade; consultas; defesas e recursos administrativos ou judiciais.')
     );
 }
@@ -71,14 +71,16 @@ function ga_core_seed_areas() {
     }
     $hub = get_page_by_path('area-de-atuacao', OBJECT, 'page');
     if ( ! $hub ) {
-        wp_insert_post(array(
+        $hub_id = wp_insert_post(array(
             'post_type' => 'page',
             'post_status' => 'publish',
             'post_title' => 'Áreas de Atuação',
             'post_name' => 'area-de-atuacao',
-            'page_template' => 'page-area-de-atuacao.php',
-            'post_content' => '<!-- Conteúdo gerado pelo tema GA Core; lista dinâmica de áreas. -->',
+            'post_content' => '<!-- Hub dinâmico gerado pelo tema GA Core. -->',
         ));
+        if ( ! is_wp_error($hub_id) && $hub_id ) {
+            update_post_meta($hub_id, '_wp_page_template', 'page-area-de-atuacao.php');
+        }
     } else if ( ! get_page_template_slug($hub->ID) ) {
         update_post_meta($hub->ID, '_wp_page_template', 'page-area-de-atuacao.php');
     }
@@ -86,19 +88,58 @@ function ga_core_seed_areas() {
 }
 add_action('after_switch_theme', 'ga_core_seed_areas');
 
-function ga_core_area_asset_path($filename) {
+function ga_core_area_asset_url($filename) {
     $filename = sanitize_file_name((string)$filename);
     if ( ! $filename ) { return ''; }
     $base = trailingslashit(get_template_directory()) . 'assets/images/areas/';
     $web = trailingslashit(get_template_directory_uri()) . 'assets/images/areas/';
-    $path = $base . $filename;
-    if ( is_file($path) ) { return $web . rawurlencode($filename); }
+    if ( is_file($base . $filename) ) { return $web . rawurlencode($filename); }
+    $slug = sanitize_title(pathinfo($filename, PATHINFO_FILENAME));
+    $attachments = get_posts(array(
+        'post_type' => 'attachment', 'post_status' => 'inherit', 'name' => $slug,
+        'posts_per_page' => 1, 'fields' => 'ids', 'no_found_rows' => true,
+    ));
+    if ( ! empty($attachments[0]) ) {
+        $url = wp_get_attachment_image_url((int)$attachments[0], 'full');
+        if ( $url ) { return $url; }
+    }
     return '';
 }
 
 function ga_core_get_area_images($post_id) {
-    return array(
-        array('file'=>(string)get_post_meta($post_id, '_ga_core_image_1', true),'url'=>ga_core_area_asset_path(get_post_meta($post_id, '_ga_core_image_1', true))),
-        array('file'=>(string)get_post_meta($post_id, '_ga_core_image_2', true),'url'=>ga_core_area_asset_path(get_post_meta($post_id, '_ga_core_image_2', true))),
+    $filenames = array(
+        (string)get_post_meta($post_id, '_ga_core_image_1', true),
+        (string)get_post_meta($post_id, '_ga_core_image_2', true),
+    );
+    $images = array();
+    foreach ( $filenames as $index => $filename ) {
+        $images[] = array(
+            'id' => $filename ? pathinfo($filename, PATHINFO_FILENAME) : '',
+            'file' => $filename,
+            'url' => ga_core_area_asset_url($filename),
+            'alt' => get_the_title($post_id) . ' — imagem editorial ' . ( $index + 1 ),
+        );
+    }
+    return $images;
+}
+
+function ga_core_missing_area_assets() {
+    $missing = array();
+    foreach ( ga_core_areas_catalog() as $area ) {
+        foreach ( array($area['image1'], $area['image2']) as $filename ) {
+            if ( ! ga_core_area_asset_url($filename) ) { $missing[] = $filename; }
+        }
+    }
+    return $missing;
+}
+
+function ga_core_admin_asset_notice() {
+    if ( ! current_user_can('manage_options') ) { return; }
+    $missing = ga_core_missing_area_assets();
+    if ( empty($missing) ) { return; }
+    printf(
+        '<div class="notice notice-warning"><p><strong>Garibalde Core — mídia mestra pendente:</strong> %d arquivos canônicos de imagem de áreas de atuação ainda não estão disponíveis na biblioteca de mídia/tema. O código já procura automaticamente cada nome; não serão usados recortes preliminares ou imagens genéricas no lugar.</p></div>',
+        count($missing)
     );
 }
+add_action('admin_notices', 'ga_core_admin_asset_notice');
