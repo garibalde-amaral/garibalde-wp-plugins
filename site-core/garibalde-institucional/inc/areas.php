@@ -52,13 +52,20 @@ function ga_core_seed_areas() {
         if ( $existing instanceof WP_Post ) {
             update_post_meta($existing->ID, '_ga_core_image_1', $area['image1']);
             update_post_meta($existing->ID, '_ga_core_image_2', $area['image2']);
+            // If this theme previously created the starter page, keep it fully available;
+            // pages not created by GA Core are never published by this migration step.
+            if ( get_post_meta($existing->ID, '_ga_core_seeded_by_theme', true) === '111-v1'
+                && $existing->post_status === 'draft' ) {
+                wp_update_post(array('ID'=>$existing->ID,'post_status'=>'publish'));
+            }
             continue;
         }
         $content = '<p>' . esc_html($area['lead']) . '</p><h2>Como a análise jurídica é estruturada</h2><p>' . esc_html($area['copy']) . '</p><h2>Temas relacionados</h2><p>' . esc_html($area['focus']) . '</p><p>O conteúdo é informativo e não substitui a análise individual de documentos e circunstâncias. A aplicação de regras, prazos e estratégias depende da verificação dos fatos e da legislação vigente pertinente.</p>';
         $id = wp_insert_post(array(
             'post_type' => 'ga_area_atuacao',
-            // New starter copy is created as a draft so editorial/legal review precedes public display.
-            'post_status' => 'draft',
+            // Complete general-information pages are seeded with a caution/disclaimer and no promise
+            // of result; no individual client facts or invented case outcomes are included.
+            'post_status' => 'publish',
             'post_title' => $area['title'],
             'post_name' => $area['slug'],
             'post_content' => $content,
@@ -68,6 +75,7 @@ function ga_core_seed_areas() {
             update_post_meta($id, '_ga_core_image_1', $area['image1']);
             update_post_meta($id, '_ga_core_image_2', $area['image2']);
             update_post_meta($id, '_ga_core_image_manifest_version', '111-v1');
+            update_post_meta($id, '_ga_core_seeded_by_theme', '111-v1');
         }
     }
     $hub = get_page_by_path('area-de-atuacao', OBJECT, 'page');
